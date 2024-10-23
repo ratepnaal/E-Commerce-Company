@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import FakeVedio from '../images/FakeVedio.png'; // صورة الفيديو المزيف
-import ShadowFakeVedio from '../images/ShadowVedio.png'; // ظل الفيديو المزيف
-import ExitVedioIcon from '../images/icons/ExitVedioIcon.svg'; // أيقونة الخروج
-import PlayVedio from '../images/icons/playVedio.svg'; // أيقونة التشغيل
+import FakeVedio from '../images/FakeVedio.png'; 
+import ShadowFakeVedio from '../images/ShadowVedio.png'; 
+import ExitVedioIcon from '../images/icons/ExitVedioIcon.svg'; 
+import PlayVedio from '../images/icons/playVedio.svg'; 
 
-const AboutUs = () => {
+const AboutUs = ({darkMode , setDarkMode}) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   // function open photo
@@ -18,10 +18,10 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="relative bg-gray-100 " id='about'>
+    <div className={`relative bg-gray-100 ${darkMode?`bg-gray-800`:`bg-gray-100`}`}>
       <h2 className="text-3xl font-medium text-center py-5 bg-blue-200  h-full w-full ">ABOUT US AND OUR SERVICES</h2>
       {/**Talk About Us */}
-      <div className='flex h-full w-full '>
+      <div className={`flex h-full w-full`}>
       <div className='w-full md:w-1/2 h-full flex-row px-5 py-5 '>
       <p className=' font-bold text-sm uppercase '>WELCOME</p>
       <p className=' text-xs uppercase font-medium'>to Z and N Construction and Landscaping, where quality meets creativity.<br/> 

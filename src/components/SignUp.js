@@ -8,7 +8,7 @@ import IconPassword from '../images/icons/carbon_password.svg'
 import username from '../images/icons/username.svg'
 import phone from '../images/icons/phone.svg'
 import IconError from '../images/icons/ERROR.svg'
-const SignUp = () => {
+const SignUp = ({darkMode , setDarkMode}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,9 +30,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col pt-0 m-0">
+    <div className={`min-h-screen w-full flex flex-col pt-0 m-0 bg-white   ${darkMode?`bg-gray-800 text-white`:``}`}>
       {/* Header*/}
-      <header className="w-full h-[45px] bg-[#1c5268] flex flex-shrink-0 "></header>
+      <header className="w-full h-[45px] bg-[#1c5268] flex flex-shrink-0 "></header>  
 
       <div className="flex flex-grow">
         {/* Left section*/}
@@ -48,7 +48,7 @@ const SignUp = () => {
         </div>
 
         {/* right section*/}
-        <div className="w-full lg:w-1/2 bg-[#f6fff6] flex flex-col justify-center items-center p-8">
+        <div className={`w-full lg:w-1/2 bg-[#f6fff6] flex flex-col justify-center items-center p-8 ${darkMode?`bg-gray-800`:``}`}>
           <h1 className="text-4xl font-bold text-center mb-6">SIGN UP</h1>
           <form onSubmit={handleSubmit} className="w-3/4 flex flex-col items-center justify-center">
             {/* profule photo*/}
@@ -77,8 +77,8 @@ const SignUp = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="EXAMPLE@GMAIL.COM"
-                className="w-full h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md "
+                className={` h-6 pl-12 py-3 text-[10px] 
+                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">
@@ -91,8 +91,8 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="****************"
-                className="w-full h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md"
+                className={` h-6 pl-12 py-3 text-[10px] 
+                  bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">
@@ -105,8 +105,8 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="@USER NAME"
-                className="w-full h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md "
+                className={` h-6 pl-12 py-3 text-[10px] 
+                  bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">
@@ -121,8 +121,8 @@ const SignUp = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="**********"
-                className="w-full h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md "
+                className={` h-6 pl-12 py-3 text-[10px] 
+                  bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">
@@ -137,8 +137,8 @@ const SignUp = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="**********"
-                className="w-full h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md "
+                className={` h-6 pl-12 py-3 text-[10px] 
+                  bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">
@@ -151,11 +151,12 @@ const SignUp = () => {
   <div className="relative w-1/2">
     <label className="text-[10px] block mb-2 mt-3">COUNTRY</label>
     <select
-      className="w-full h-6 pl-2 py-3 text-[10px] bg-gray-200 border border-neutral-500 shadow-xl rounded-md"
+      className={`w-full h-6 pl-2 py-3 text-[10px] bg-gray-200 border
+         border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``} `}
       required
     >
       <option value="" disabled selected>Select Country</option>
-      <option value="Syria">Syria</option>
+      <option value="Syria" >Syria</option>
       <option value="Egypt">Egypt</option>
       <option value="Jordan">Jordan</option>
       <option value="Saudi Arabia">Saudi Arabia</option>
@@ -167,7 +168,8 @@ const SignUp = () => {
   <div className="relative w-1/2">
     <label className="text-[10px] block mb-2 mt-3">CITY</label>
     <select
-      className="w-full h-6 pl-2 py-3 text-[10px] bg-gray-200 border border-neutral-500 shadow-xl rounded-md"
+      className={`w-full h-6 pl-2 py-3 text-[10px] bg-gray-200 border
+        border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``} `}
       required
     >
       <option value="" disabled selected>Select City</option>

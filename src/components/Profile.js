@@ -6,8 +6,9 @@ import BackgroundProfile from '../images/Background-profile.png';
 import Lawn from '../images/the lawn.png'; 
 import Header from '../landing components/Header';
 import IconLogout from '../images/icons/Logout.svg';
+import DarkModeToggle from './DarkModeToggle';
 
-const Profile = () => {
+const Profile = ({darkMode , setDarkMode}) => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // Toggle logout confirmation
@@ -23,6 +24,7 @@ const Profile = () => {
   return (
     <div className="relative pt-0">
       <Header/>
+      <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
       {/* Background image */}
       <div className="relative">
         <img src={BackgroundProfile} alt="Background" className="w-full h-64 object-cover" />
@@ -81,9 +83,9 @@ const Profile = () => {
 
       {/* Logout Confirmation window */}
       {showLogoutConfirm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 `}>
           <div className="bg-white p-6 rounded-3xl shadow-lg w-80 text-center">
-            <p className="text-lg mb-5 font-semibold">ARE YOU SURE YOU WANT TO LOGOUT?</p>
+            <p className={`text-lg mb-5 font-semibold ${darkMode?`text-black`:``}`}>ARE YOU SURE YOU WANT TO LOGOUT?</p>
             <hr className='border-black border-t w-full mb-4'/>     
             <div className="flex justify-around">
               <button 

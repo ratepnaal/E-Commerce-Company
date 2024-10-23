@@ -12,7 +12,7 @@ import IconError from "../images/icons/ERROR.svg";
 import { Link } from "react-router-dom";
 
 
-const Login = () => {
+const Login = ({darkMode , setDarkMode}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [currentImage, setCurrentImage] = useState(0);
@@ -65,8 +65,8 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="EXAMPLE@GMAIL.COM"
-                className=" h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md "
+                className= {`h-6 pl-12 py-3 text-[10px] 
+                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">
@@ -82,8 +82,9 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="**********"
-                className=" h-6 pl-12 py-3 text-[10px] 
-                 bg-gray-200 border border-neutral-500 shadow-xl rounded-md "
+                className= {`h-6 pl-12 py-3 text-[10px] 
+                  bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${darkMode?`text-black`:``}`}
+
                 required
               />
               <span className="absolute top-7 left-3 flex items-center">

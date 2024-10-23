@@ -3,20 +3,20 @@ import Logo from '../images/logo.svg'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({darkMode , setDarkMode}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
    // Toggle menu
    const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <header className="flex justify-between items-center bg-teal-700 text-white p-4">
+    <header className={`flex justify-between items-center bg-teal-700 text-white p-4`}>
       <div className="flex items-center space-x-4">
         <img src={Logo} alt="Logo" className="h-10" />
-        <span className="text-sm md:text-xs font-semibold tracking-widest">THE CONSTRUCTION AND <br></br> LANDSCAPING COMPANY</span>
+        <span className={`text-sm md:text-xs font-semibold tracking-widest  ${darkMode?`text-black`:``}`}>THE CONSTRUCTION AND <br></br> LANDSCAPING COMPANY</span>
       </div>
 
-      <nav className="hidden md:flex space-x-6">
+      <nav className={`hidden md:flex space-x-6  ${darkMode?`text-black`:``}`}>
         <Link to="/landing" className="text-lg font-medium hover:border-b-2 hover:border-white">HOME</Link>
         <a href="#about"  className="text-lg  font-medium hover:border-b-2 hover:border-white">ABOUT US</a>
         <a href="#projects"  className="text-lg  font-medium hover:border-b-2 hover:border-white">PROJECTS</a>
@@ -26,19 +26,20 @@ const Header = () => {
         <input 
           type="text" 
           placeholder="Search..." 
-          className="hidden md:block p-2 pr-8 rounded-lg text-black text-sm"
+          className={`hidden md:block p-2 pr-8 rounded-lg text-black text-sm  ${darkMode?`bg-gray-800 text-white`:``}`}
         />
         <div className="flex items-center space-x-1">
           <button className="block md:hidden text-2xl" onClick={handleMenuClick}>☰</button>
-          <span className="hidden md:block text-lg font-medium cursor-pointer" onClick={handleMenuClick}>MENU</span>
+          <span className={`hidden md:block text-lg font-medium cursor-pointer  ${darkMode?`text-black`:``} `} onClick={handleMenuClick}>MENU</span>
         </div>
-        <button className="bg-green-400 font-medium hover:bg-green-600 text-black py-2 px-4 rounded-lg text-sm border border-white">
+        <button className={`bg-green-400 font-medium hover:bg-green-600
+         text-black py-2 px-4 rounded-lg text-sm border border-white`}>
           BOOK NOW 
         </button>
       </div>
           {/* Menu section */}
           {isMenuOpen && (
-        <div className="absolute top-0 w-64 bg-white shadow-lg p-4 text-black z-50" >
+        <div className={`absolute top-0 w-64 bg-white shadow-lg p-4 text-black z-50 ${darkMode?`bg-gray-700 text-white`:``}`} >
           <ul className="space-y-2 text-lg ">
            <li><a href='#land' className='hover:bg-teal-700'><Link to="/landing">LANDSCAPING</Link></a></li> 
            <li><a href='#dec' className='hover:bg-teal-700'>DECKING</a></li> 

@@ -4,13 +4,13 @@ import BigCircle from '../images/BigCircle.svg';
 import SmallCircle from '../images/SmallCircle.svg';
 import { Link } from 'react-router-dom';
 
-const Verification = () => {
+const Verification = ({darkMode , setDarkMode}) => {
     const [Signed , setSigned] = useState(false);
     const handleSigned = ()=>{
         setSigned(true)
     }
   return (
-    <div  className="flex flex-col items-center justify-center min-h-screen bg-[#F0F8FF]">
+    <div  className={`flex flex-col items-center justify-center min-h-screen bg-[#F0F8FF] ${darkMode?`bg-gray-900 text-white`:``}`}>
       <div className="relative w-full h-[200px] flex justify-center items-center">
         {/* Background circles */}
         <img src={BigCircle} alt="BigCircle" className="absolute top-[-50px]  left-[670px] w-40 h-40 " />
@@ -48,16 +48,17 @@ const Verification = () => {
         VERIFY AND CONTINUE
       </button>
       {Signed && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className={`fixed inset-0 flex items-center justify-center
+           bg-black bg-opacity-50 `}>
           <div
-            className="bg-white p-4 rounded-2xl shadow-lg text-center fade-in"
+            className={`bg-white p-4 rounded-2xl shadow-lg text-center fade-in`}
             style={{
               width: "300px",
               animation: "fadeIn 0.5s",
               borderRadius: "20px",
             }}
           >
-            <h2 className="text-lg font-semibold text-black mb-4">SIGNED UP</h2>
+            <h2 className={`text-lg font-semibold text-black mb-4`}>SIGNED UP</h2>
             <p className="text-gray-600 mb-2 text-xs">
             YOUR ACCOUNT IS SUCCESSFULLY VERIFIED
             </p>

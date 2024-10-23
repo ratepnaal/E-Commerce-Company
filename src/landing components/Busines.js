@@ -16,9 +16,9 @@ import whatsappIcon from '../images/icons/whatsappIcon.svg';
 import EmailIcon from '../images/icons/ic_outline-email.svg';
 import viewAllIcon from '../images/icons/veiwAll.svg';
 
-const Business = () => {
+const Business = ({darkMode , setDarkMode}) => {
   return (
-    <div className="bg-blue-300 p-8">
+    <div className={`bg-blue-300 p-8 ${darkMode?`bg-gray-800`:``}`}>
       {/* Tittle section */}
       <h1 className="text-4xl font-semibold text-center mb-8 text-gray-800">
         BUSINESS EXHIBITION
@@ -27,9 +27,9 @@ const Business = () => {
       {/*section images*/}
       <div className="flex justify-between" id='projects'>
         {/* interior images*/}
-        <div className="w-1/2 border border-blue-300 p-4 rounded-md mr-4 bg-white ">
+       <div className={`w-1/2 border border-blue-300 p-4 mr-5 rounded-md bg-white ${darkMode?`bg-gray-500`:``}` } >
           <div className="flex justify-between items-center mb-4 ">
-            <h2 className="text-sm md:text-xl font-bold text-gray-700">INTERIOR</h2>
+          <h2 className={`text-sm md:text-xl font-bold text-gray-700 ${darkMode?`text-white`:``}`}>INTERIOR</h2>
             <button className="flex items-center px:1 py-1 md:px-3 text-xs md:text-sm  bg-teal-900 text-white rounded-lg mb-4 hover:bg-teal-950 transition">
               VIEW ALL
               <img src={viewAllIcon} alt="View All Icon" className="w-4 h-4 ml-2" />
@@ -46,9 +46,9 @@ const Business = () => {
         </div>
 
         {/*exterior images*/}
-        <div className="w-1/2 border border-blue-300 p-4 rounded-md bg-white">
+        <div className={`w-1/2 border border-blue-300 p-4 rounded-md bg-white ${darkMode?`bg-gray-500`:``}` } >
           <div className="flex justify-between items-center mb-4">
-          <h2 className="text-sm md:text-xl font-bold text-gray-700">EXTERIOR</h2>
+          <h2 className={`text-sm md:text-xl font-bold text-gray-700 ${darkMode?`text-white`:``}`}>EXTERIOR</h2>
             <button className="flex items-center px:1 py-1 md:px-3 text-xs md:text-sm  bg-teal-900 text-white rounded-lg mb-4 hover:bg-teal-950 transition">
               VIEW ALL
               <img src={viewAllIcon} alt="View All Icon" className="w-4 h-4 ml-2" />
@@ -66,7 +66,7 @@ const Business = () => {
       </div>
 
       {/* contact us*/}
-      <div className=" md:flex justify-between items-center mt-8 bg-blue-300 p-4 rounded-md" id='contact'>
+      <div className= {`md:flex justify-between items-center mt-8 bg-blue-300 p-4 rounded-md ${darkMode?`bg-gray-800`:``}`} id='contact'>
         <div className='flex items-center'>
             <span className='text-2xl'>CONTACT US</span>
         </div>
