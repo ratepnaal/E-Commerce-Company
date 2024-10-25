@@ -1,6 +1,7 @@
+import { hover } from '@testing-library/user-event/dist/hover';
 import React, { useState } from 'react';
 
-const LanguageSelector = ({ currentLanguage, changeLanguage }) => {
+const LanguageSelector = ({ currentLanguage, changeLanguage , darkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -22,13 +23,13 @@ const LanguageSelector = ({ currentLanguage, changeLanguage }) => {
         {currentLanguage.toUpperCase()}
       </button>
       {isOpen && (
-        <ul className="bg-white border border-gray-300 mt-60 rounded-md shadow-lg">
-          <li onClick={() => handleLanguageChange('en')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">English</li>
-          <li onClick={() => handleLanguageChange('ar')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Arabic</li>
-          <li onClick={() => handleLanguageChange('fr')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">French</li>
-          <li onClick={() => handleLanguageChange('de')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">German</li>
-          <li onClick={() => handleLanguageChange('es')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Spanish</li>
-          <li onClick={() => handleLanguageChange('zh')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Chinese</li>
+        <ul className={`border border-gray-300 mt-60 rounded-md shadow-lg ${darkMode?`bg-gray-800`:`bg-white `}`}>
+          <li onClick={() => handleLanguageChange('en')} className={`px-4 py-2 cursor-pointer ${darkMode?`hover:bg-gray-950`:`hover:bg-gray-200`}`}>English</li>
+          <li onClick={() => handleLanguageChange('ar')} className={`px-4 py-2 cursor-pointer ${darkMode?`hover:bg-gray-950`:`hover:bg-gray-200`}`}>Arabic</li>
+          <li onClick={() => handleLanguageChange('fr')} className={`px-4 py-2 cursor-pointer ${darkMode?`hover:bg-gray-950`:`hover:bg-gray-200`}`}>French</li>
+          <li onClick={() => handleLanguageChange('de')} className={`px-4 py-2 cursor-pointer ${darkMode?`hover:bg-gray-950`:`hover:bg-gray-200`}`}>German</li>
+          <li onClick={() => handleLanguageChange('es')} className={`px-4 py-2 cursor-pointer ${darkMode?`hover:bg-gray-950`:`hover:bg-gray-200`}`}>Spanish</li>
+          <li onClick={() => handleLanguageChange('zh')} className={`px-4 py-2 cursor-pointer ${darkMode?`hover:bg-gray-950`:`hover:bg-gray-200`}`}>Chinese</li>
         </ul>
       )}
     </div>

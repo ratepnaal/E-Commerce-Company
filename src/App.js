@@ -42,7 +42,7 @@ const App = () => {
   return (
     <div className={`${darkMode?`bg-gray-900 text-white`:``}`}>
       <I18nextProvider i18n={i18n}>
-      <LanguageSelector currentLanguage={currentLanguage} changeLanguage={changeLanguage} />
+      <LanguageSelector currentLanguage={currentLanguage} changeLanguage={changeLanguage} darkMode={darkMode} />
       <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
       <Router>
         <Routes>
