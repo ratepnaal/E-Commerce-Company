@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import lightShade from '../images/floorImage/floor1.png';
 import DarkShade from '../images/floorImage/floor2.png';
 import ShadeType1 from '../images/floorImage/floor3.png';
@@ -9,6 +10,7 @@ import ShadeType5 from '../images/floorImage/floor7.png';
 import Header from './Header';
 
 const Floors = () => {
+  const {t} = useTranslation();
   const floorImages = [
     { src: lightShade, label: 'LIGHT SHADE BUTTERSCOTCH OAK' },
     { src: DarkShade, label: 'DARK SHADE BUTTERSCOTCH OAK' },
@@ -22,10 +24,10 @@ const Floors = () => {
     <div>
         <Header/>
          <div className=" bg-blue-50 min-h-screen">
-      {/* العنوان الرئيسي للصفحة */}
-      <h1 className="text-3xl font-semibold pl-5 py-5 bg-blue-200">FLOORS</h1>
+      {/* Main tittle */}
+      <h1 className="text-3xl font-semibold pl-5 py-5 bg-blue-200">{t('images')}</h1>
 
-      {/* عرض الصور */}
+      {/* Images*/}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-8 mt-8">
         {floorImages.map((floor, index) => (
           <div key={index} className="flex flex-col items-center">

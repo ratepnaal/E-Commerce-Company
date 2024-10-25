@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import profileImage from '../images/profile-image.png';
 import BackgroundShadow from '../images/shadow-of-background.png';
@@ -20,6 +21,7 @@ const Profile = ({darkMode , setDarkMode}) => {
   const handleCloseLogout = () => {
     setShowLogoutConfirm(false);
   };
+  const {t} = useTranslation();
 
   return (
     <div className="relative pt-0">
@@ -36,7 +38,7 @@ const Profile = ({darkMode , setDarkMode}) => {
         {/* Lawn section (25%) */}
         <div className="w-2/5  relative">
           <div className="absolute bottom-0 left-0">
-            <img src={Lawn} alt="Lawn" className="w-full h-auto object-cover" /> {/* العشب */}
+            <img src={Lawn} alt="Lawn" className="w-full h-auto object-cover" />
           </div>
           <div className="relative  ml-8">
             <div className="relative w-40 h-40 ">
@@ -45,7 +47,7 @@ const Profile = ({darkMode , setDarkMode}) => {
                 alt="Profile" 
                 className="w-full h-full rounded-full border-4 border-white "
               />
-              <div className="absolute bottom-0 left-0 bg-white text-black px-2 py-1 rounded-lg text-xs font-semibold">@JAMES_WILLIAMS</div>
+              <div className="absolute bottom-0 left-0 bg-white text-black px-2 py-1 rounded-lg text-xs font-semibold">{t('social_media')}</div>
             </div>
           </div>
         </div>
@@ -54,17 +56,17 @@ const Profile = ({darkMode , setDarkMode}) => {
         <div className="w-3/5 h-full bg-slate-800 text-white flex flex-col justify-center p-16">
           <div>
             <div>
-            <p className="inline-block text-green-500 text-sm lg:text-lg font-medium mt-4 pr-10">NAME :</p>
-            <p className=" text-sm lg:text-lg inline-block">JAMES WILLIAMS</p>
+            <p className="inline-block text-green-500 text-sm lg:text-lg font-medium mt-4 pr-10">{t('name_label')}</p>
+            <p className=" text-sm lg:text-lg inline-block">{t('name')}</p>
             </div>
-            <p className="text-green-500  text-sm lg:text-lg font-medium mt-4  inline-block pr-10">COUNTRY :</p>
-            <p className=" text-sm lg:text-lg inline-block ">USA - WASHINGTON, D.C.</p>
+            <p className="text-green-500  text-sm lg:text-lg font-medium mt-4  inline-block pr-10">{t('country_label')}</p>
+            <p className=" text-sm lg:text-lg inline-block ">{t('country_name')}</p>
             <div>
-            <p className="text-green-500  text-sm lg:text-lg font-medium mt-4 pr-10 inline-block ">EMAIL :</p>
-            <p className=" text-sm lg:text-lg inline-block">JAMES96@GMAIL.COM</p>
+            <p className="text-green-500  text-sm lg:text-lg font-medium mt-4 pr-10 inline-block ">{t('email_address')}</p>
+            <p className=" text-sm lg:text-lg inline-block">{t('email')}</p>
             </div>
-            <p className="text-green-500  text-sm lg:text-lg font-medium mt-4 pr-10 inline-block">PHONE :</p>
-            <p className=" text-sm lg:text-lg inline-block ">+1 202 555 1234</p>
+            <p className="text-green-500  text-sm lg:text-lg font-medium mt-4 pr-10 inline-block">{t('phone_label')}</p>
+            <p className=" text-sm lg:text-lg inline-block ">{t('phone')}</p>
           </div>
         </div>
       </div>
@@ -77,7 +79,7 @@ const Profile = ({darkMode , setDarkMode}) => {
            rounded-lg font-medium border border-white hover:bg-red-700 shadow-xl "
         >
           <img src={IconLogout} alt="Icon Logout" className="h-4 w-4" />
-          <span>LOGOUT</span>
+          <span>{t('logout')}</span>
         </button>
       </div>
 
@@ -85,13 +87,13 @@ const Profile = ({darkMode , setDarkMode}) => {
       {showLogoutConfirm && (
         <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 `}>
           <div className="bg-white p-6 rounded-3xl shadow-lg w-80 text-center">
-            <p className={`text-lg mb-5 font-semibold ${darkMode?`text-black`:``}`}>ARE YOU SURE YOU WANT TO LOGOUT?</p>
+            <p className={`text-lg mb-5 font-semibold ${darkMode?`text-black`:``}`}>{t('logout_confirmation')}</p>
             <hr className='border-black border-t w-full mb-4'/>     
             <div className="flex justify-around">
               <button 
                 className="text-green-500 px-4 py-2 font-semibold hover:text-green-800"
               >
-                <Link to={'/'}>YES</Link>
+                <Link to={'/'}>{t('yes')}</Link>
               </button>
 
       <div className="border-l-2 border-gray-500 w-px max-h-svh"></div>
@@ -100,7 +102,7 @@ const Profile = ({darkMode , setDarkMode}) => {
                 className="text-green-500 px-4 py-2 font-semibold hover:text-green-800"
                 onClick={handleCloseLogout}
               >
-                NO
+              {t('no')}
               </button>
             </div>
           </div>

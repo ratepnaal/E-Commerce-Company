@@ -10,6 +10,7 @@ import IconeEmail from "../images/icons/ic_outline-email.svg";
 import IconPassword from "../images/icons/carbon_password.svg";
 import IconError from "../images/icons/ERROR.svg";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 const Login = ({darkMode , setDarkMode}) => {
@@ -42,6 +43,7 @@ const Login = ({darkMode , setDarkMode}) => {
       setInvailed("");
     }  
   };
+  const {t} = useTranslation();
  
  
   return (
@@ -51,15 +53,15 @@ const Login = ({darkMode , setDarkMode}) => {
       <div className="flex flex-grow">
         {/* Left Section */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8">
-          <h1 className="text-6xl font-bold text-center mb-2">WELCOME</h1>
+          <h1 className="text-6xl font-bold text-center mb-2">{t('welcome_title')}</h1>
           <p className="text-3xl font-semibold text-center mb-8">
-            REINVENT YOUR SPACE WITH US
+           {t('subtitle')}
           </p>
           <img src={Logo} alt="Logo" className="h-16 mb-8" />
           <form onSubmit={handleSubmit} className="w-3/4 flex flex-col items-center justify-center">  
             {/* Email*/}
             <div className="relative mb-6">
-              <label className="text-[10px] block mb-2">EMAIL ADDRESS</label>
+              <label className="text-[10px] block mb-2">{t('email_label')}</label>
               <input
                 type="email"
                 value={email}
@@ -76,7 +78,7 @@ const Login = ({darkMode , setDarkMode}) => {
 
             {/* Password*/}
             <div className="relative mb-6">
-              <label className="text-[10px] block mb-2">PASSWORD</label>
+              <label className="text-[10px] block mb-2">{t('password_label')}</label>
               <input
                 type="password"
                 value={password}
@@ -102,12 +104,12 @@ const Login = ({darkMode , setDarkMode}) => {
             {/*Link & Button */}
             <div className="flex flex-col items-center justify-center mb-6">
               <div className="text-center">
-                <h4 className="text-[11px] inline">DON'T HAVE AN ACCOUNT?</h4>
-                <Link to={'/sign-up'} className="text-[11px] text-blue-500 hover:underline ml-2">SIGN UP </Link>
+                <h4 className="text-[11px] inline">{t('dont-have')}</h4>
+                <Link to={'/sign-up'} className="text-[11px] text-blue-500 hover:underline ml-2">{t('signup-label')}</Link>
               </div>
               <div className="text-center mt-2">
-                <h4 className="text-[11px] inline">FORGOT PASSWORD?</h4>
-                <Link to={'/change-password'} className="text-[11px] text-blue-500 hover:underline ml-2"> CHANGE PASSWORD</Link>
+                <h4 className="text-[11px] inline">{t('forget')}</h4>
+                <Link to={'/change-password'} className="text-[11px] text-blue-500 hover:underline ml-2">{t('change')}</Link>
               </div>
             </div>
             <button
@@ -115,7 +117,7 @@ const Login = ({darkMode , setDarkMode}) => {
               className="w-28 h-8 border border-neutral-500 shadow-xl bg-green-500 flex items-center justify-center
                hover:bg-green-600 text-black font-semibold py-2 rounded-lg text-[11px]"
             >
-              LOGIN
+            {t('login')}
             </button>
           </form>
         </div>
@@ -143,9 +145,9 @@ const Login = ({darkMode , setDarkMode}) => {
               borderRadius: "20px",
             }}
           >
-            <h2 className="text-lg font-semibold text-black mb-4">ERROR</h2>
+            <h2 className="text-lg font-semibold text-black mb-4">{t('title')}</h2>
             <p className="text-gray-600 mb-2 text-xs">
-              PLEASE WAIT A FEW MINUTES <br /> BEFORE YOU TRY AGAIN
+             {t('message')}
             </p>
             <hr className="w-4/5 border-b-2  border-gray-400 mx-auto my-4" />
 
@@ -153,7 +155,7 @@ const Login = ({darkMode , setDarkMode}) => {
               onClick={() => setShowModalError(false)}
               className="text-red-500 font-semibold hover:underline text-xs"
             >
-              DISMISS
+           {t('dismiss_button')}
             </button>
           </div>
         </div>

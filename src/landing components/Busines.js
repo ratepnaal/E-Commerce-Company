@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import interior1 from '../images/interior/interior1.png';
 import interior2 from '../images/interior/interior2.png';
 import interior3 from '../images/interior/interior3.png';
@@ -17,21 +18,22 @@ import EmailIcon from '../images/icons/ic_outline-email.svg';
 import viewAllIcon from '../images/icons/veiwAll.svg';
 
 const Business = ({darkMode , setDarkMode}) => {
+  const {t} = useTranslation();
   return (
-    <div className={`bg-blue-300 p-8 ${darkMode?`bg-gray-800`:``}`}>
+    <div className={`bg-blue-300 p-8 ${darkMode?`bg-gray-800 text-white`:``}`}>
       {/* Tittle section */}
-      <h1 className="text-4xl font-semibold text-center mb-8 text-gray-800">
-        BUSINESS EXHIBITION
+      <h1 className={`text-4xl font-semibold text-center mb-8 ${darkMode?`text-white`:``}`} >
+     {t('Business-exhibition')}
       </h1>
 
       {/*section images*/}
       <div className="flex justify-between" id='projects'>
         {/* interior images*/}
-       <div className={`w-1/2 border border-blue-300 p-4 mr-5 rounded-md bg-white ${darkMode?`bg-gray-500`:``}` } >
-          <div className="flex justify-between items-center mb-4 ">
-          <h2 className={`text-sm md:text-xl font-bold text-gray-700 ${darkMode?`text-white`:``}`}>INTERIOR</h2>
+       <div className={`w-1/2 border border-blue-300 p-4 mr-5 rounded-md ${darkMode?`bg-gray-500`:`bg-white`}` } >
+          <div className={`flex justify-between items-center mb-4 `} >
+          <h2 className={`text-sm md:text-xl font-bold  ${darkMode?`text-white`:``}`}>{t('interior')}</h2>
             <button className="flex items-center px:1 py-1 md:px-3 text-xs md:text-sm  bg-teal-900 text-white rounded-lg mb-4 hover:bg-teal-950 transition">
-              VIEW ALL
+              {t('view_all')}
               <img src={viewAllIcon} alt="View All Icon" className="w-4 h-4 ml-2" />
             </button>
           </div>
@@ -46,11 +48,11 @@ const Business = ({darkMode , setDarkMode}) => {
         </div>
 
         {/*exterior images*/}
-        <div className={`w-1/2 border border-blue-300 p-4 rounded-md bg-white ${darkMode?`bg-gray-500`:``}` } >
+        <div className={`w-1/2 border border-blue-300 p-4 rounded-md   ${darkMode?`bg-gray-500`:`bg-white`}` } >
           <div className="flex justify-between items-center mb-4">
-          <h2 className={`text-sm md:text-xl font-bold text-gray-700 ${darkMode?`text-white`:``}`}>EXTERIOR</h2>
+          <h2 className={`text-sm md:text-xl font-bold  ${darkMode?`text-white`:``}`}>{t('exterior')}</h2>
             <button className="flex items-center px:1 py-1 md:px-3 text-xs md:text-sm  bg-teal-900 text-white rounded-lg mb-4 hover:bg-teal-950 transition">
-              VIEW ALL
+             {t('view_all')}
               <img src={viewAllIcon} alt="View All Icon" className="w-4 h-4 ml-2" />
             </button>
           </div>
@@ -68,19 +70,19 @@ const Business = ({darkMode , setDarkMode}) => {
       {/* contact us*/}
       <div className= {`md:flex justify-between items-center mt-8 bg-blue-300 p-4 rounded-md ${darkMode?`bg-gray-800`:``}`} id='contact'>
         <div className='flex items-center'>
-            <span className='text-2xl'>CONTACT US</span>
+            <span className='text-2xl'>{t('contact_us')}</span>
         </div>
         <div className="flex items-center">
           <img src={locationIcon} alt="Location Icon" className="mr-2 h-4 w-4" />
-          <span className='text-xs md:text-sm font-medium'>1234 Greenway Drive, Springfield, IL 62701</span>
+          <span className='text-xs md:text-sm font-medium'>{t('address')}</span>
         </div>
         <div className="flex items-center">
           <img src={whatsappIcon} alt="WhatsApp Icon" className="mr-2 h-4 w-4"  />
-          <span className='text-xs md:text-sm font-medium'>(555) 123-4567</span>
+          <span className='text-xs md:text-sm font-medium'>{t('phone_contact')}</span>
         </div>
         <div className="flex items-center">
           <img src={EmailIcon} alt="Email Icon" className="mr-2 h-4 w-4" />
-          <span className='text-xs md:text-sm font-medium'>info@zandnconstruction.com</span>
+          <span className='text-xs md:text-sm font-medium'>{t('email_contact')}</span>
         </div>
       </div>
     </div>
