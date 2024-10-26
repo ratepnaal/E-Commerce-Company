@@ -4,6 +4,7 @@ import FakeVedio from '../images/FakeVedio.png';
 import ShadowFakeVedio from '../images/ShadowVedio.png'; 
 import ExitVedioIcon from '../images/icons/ExitVedioIcon.svg'; 
 import PlayVedio from '../images/icons/playVedio.svg'; 
+import DarkModeToggle from '../components/DarkModeToggle';
 
 const AboutUs = ({ darkMode, setDarkMode }) => {
   const { t } = useTranslation(); 
@@ -22,6 +23,7 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
       <h2 className={`text-3xl font-medium text-center py-5 bg-blue-200  h-full w-full ${darkMode?`bg-gray-800`:``}`} >
         {t('about_us')}
       </h2>
+      <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
       <div className="flex h-full w-full">
         <div className='w-full md:w-1/2 h-full flex-row px-5 py-5'>
           <p className='font-bold text-sm uppercase'>{t('welcome')}</p>

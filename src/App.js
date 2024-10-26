@@ -9,7 +9,6 @@ import Profile from './components/Profile';
 import LandingPage from './components/LandingPage';
 import Floors from './landing components/Floors';
 import DarkModeToggle from './components/DarkModeToggle';
-import i18n from './I18n';
 import LanguageSelector from './components/LanguageSelector ';
 import { useTranslation } from 'react-i18next';
 const App = () => {
@@ -39,6 +38,10 @@ const App = () => {
      i18n.changeLanguage(lang);
      setCurrentLanguage(lang);
    };
+   useEffect(() => {
+    document.body.dir = currentLanguage === "ar" ? "rtl" : "ltr";
+  }, [currentLanguage]);
+
   return (
     <div className={`${darkMode?`bg-gray-900 text-white`:``}`}>
       <I18nextProvider i18n={i18n}>
@@ -60,6 +63,7 @@ const App = () => {
   )
 }
 export default App
+
 
 
 
