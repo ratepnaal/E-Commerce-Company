@@ -117,7 +117,30 @@
 "sinks": "الأحواض",
 "faucets": "الحنفيات",
 "kitchens": "المطابخ",
-"Business-exhibition": "معرض الأعمال"
+"Business-exhibition": "معرض الأعمال",
+"message-error-mismatch":"عذرا كلمات المرور غير متطابقة !  ",
+"error-message-signup-failed":"عذرا حدث خطأ اثناء التسجيل ! ",
+"error-message-login-failed": "خطأ في تسجيل الدخول !",
+"error_message.verification_failed":"رمز تاكيد خاطئ !",
+"title-of-succsess-sign-up":"تم تسجيل معلوماتك بنجاح ",
+"message-of-success-sign-up":"الان علينا التحقق من بريدك الالكتروني ",
+"close-success-button":"الانتقال ",
+"title-of-succsess-login":"تم تسجيل الدخول بنجاح ",
+"code_resent_successfully":"تمت اعادة ارسال الكود بنجاح ",
+"error_message.resend_failed":"فشل اعادة ارسال الكود ! ",
+"error-cannot-send-code":"فشل ارسال الكود !",
+"send-code":"ارسال الرمز",
+"title-of-succsess-send-email":"تم ارسال الرمز بنجاح ",
+"message-of-success-send-email":"لقد ارسلنا رمزا الى بريدك الالكتروني ",
+"enter_the_6_digit_code-reset-password":"أدخل الرمز المكون من 6 أرقام (يتضمن أحرف وأرقام) الذي أرسلناه إلى بريدك الإلكتروني لاعادة تعيين كلمة المرور ",
+"your_password_is_successfully_verified":"تم التاكد من الايميل الخاص بك ",
+"password-reseted":"الرمز مطابق !",
+"valid_for_10_minutes":"صالح لمدة عشر دقائق ",
+"new-password":"كلمة المرور الجديدة",
+"login-new-password":"الان يمكنك تسجيل الدخول من خلال كلمة المرور الجديدة ",
+"message-of-success-changed":"تم تحديث كلمة المرور الخاصة بحسابك ",
+"error_message.reset_failed":"عذرا كلمة المرور ضعيفة !",
+"error_message.passwords_mismatch":"عذرا كلمات المرور غير متطابقة "
 
   
 }

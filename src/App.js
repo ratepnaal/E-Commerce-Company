@@ -10,6 +10,9 @@ import LandingPage from './components/LandingPage';
 import Floors from './landing components/Floors';
 import DarkModeToggle from './components/DarkModeToggle';
 import LanguageSelector from './components/LanguageSelector ';
+import VerifyResetCode from './components/VerifyResetCode';
+import SetNewPassword from './components/SetNewPassword';
+//import { UserProvider } from './components/UserContext';
 import { useTranslation } from 'react-i18next';
 const App = () => {
   const [darkMode , setDarkMode] = useState(false);
@@ -56,9 +59,12 @@ const App = () => {
           <Route path='/profile' element = {<Profile darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
           <Route path='landing' element = {<LandingPage darkMode= {darkMode} setDarkMode = {setDarkMode} />}/>
           <Route path='/floors' element = {<Floors darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
+          <Route path='/verify-code' element = {<VerifyResetCode darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
+          <Route path='/set-password' element = {<SetNewPassword darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
         </Routes>
       </Router>
       </I18nextProvider>
+
     </div>
   )
 }
