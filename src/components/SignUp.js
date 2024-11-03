@@ -31,11 +31,21 @@ const SignUp = ({ darkMode, setDarkMode }) => {
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
-  const handleImageChange = (e) => {
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  };
+  
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPhoto(file); // تخزين الملف في `state`
-      setPreview(URL.createObjectURL(file)); // عرض معاينة الصورة في الدائرة
+      const base64 = await convertToBase64(file);
+      setPhoto(base64); // تخزين الصورة بقاعدة 64
+      setPreview(base64); // عرض معاينة الصورة
     }
   };
   const handleSubmit = async (e) => {
@@ -57,21 +67,15 @@ try {                      // send information to api
   formData.append("address", `${country}, ${city}`);
   formData.append("email", email);
   formData.append("password", password);
-  if (photo) {
-    formData.append("photo", photo);
-  }
       const response =  await signUp(formData);
+      localStorage.setItem('email', email);
+        localStorage.setItem('username', fullName);
+        localStorage.setItem('number' , phone);
+        localStorage.setItem('address' , `${country} , ${city}`);
+        localStorage.setItem('photo', photo );
+      console.log(localStorage.getItem('username'))
       console.log("Sign Up Successful:", response);
         setShowSuccess(true); 
-        const token = response.data.token;
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('userData', JSON.stringify({
-          fullName,
-          email,
-          address: `${country}, ${city}`,
-          phone,
-          profileImage: photo ? URL.createObjectURL(photo) : null // تخزين مسار الصورة
-        }));
         setTimeout(() => {
           setShowSuccess(false);     // إخفاء النافذة بعد التأخير
           navigate('/verification', { state: { email } });

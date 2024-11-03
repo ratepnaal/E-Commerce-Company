@@ -1,5 +1,5 @@
 import {React , useState , useEffect} from 'react'
-import { BrowserRouter as Router , Route , Routes } from "react-router-dom";
+import { BrowserRouter as Router , Route , Routes, useNavigate } from "react-router-dom";
 import { I18nextProvider } from 'react-i18next';
 import Login from './components/Login'
 import ChangePassword from './components/ChangePassword';
@@ -12,8 +12,8 @@ import DarkModeToggle from './components/DarkModeToggle';
 import LanguageSelector from './components/LanguageSelector ';
 import VerifyResetCode from './components/VerifyResetCode';
 import SetNewPassword from './components/SetNewPassword';
-//import { UserProvider } from './components/UserContext';
 import { useTranslation } from 'react-i18next';
+
 const App = () => {
   const [darkMode , setDarkMode] = useState(false);
   useEffect(()=>{
@@ -64,7 +64,6 @@ const App = () => {
         </Routes>
       </Router>
       </I18nextProvider>
-
     </div>
   )
 }

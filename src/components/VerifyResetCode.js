@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import MailPhoto from '../images/verification.png';
 import { useNavigate } from 'react-router-dom';
@@ -33,13 +33,13 @@ const VerifyResetCode = ({darkMode , setDarkMode}) => {
       console.log('Verification successful:', response.data);
       // تخزين التوكن في localStorage لاستخدامه لاحقًا
       const token = response.data.token; 
-      localStorage.setItem('resetToken', token);
+      localStorage.setItem('authToken', token);
         // إظهار رسالة النجاح
       setSigned(true);
-     setInterval(() => {
-      setSigned(false);
-      navigate("/set-password")
-     }, 3000);
+      setTimeout(() => {
+        setSigned(false);
+        navigate("/set-password");
+      }, 3000);
                              
     } catch (error) {
       console.error('Verification failed:', error);

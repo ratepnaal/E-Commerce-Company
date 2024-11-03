@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState  } from 'react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import Logo from '../images/logo.svg';
 import BackgroundImage from '../images/ImageLogin-6.png'; 
-import { useNavigate , useLocation } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import IconError from "../images/icons/ERROR.svg";
 const SetNewPassword = (darkMode , setDarkMode) => {
   const [showSuccess , setShowSuccess] = useState(false);
@@ -11,13 +11,12 @@ const SetNewPassword = (darkMode , setDarkMode) => {
   const [password , setPassword] = useState("");
   const [confirmPassword , setConfirmPassword] = useState("");
   const {t} = useTranslation();
-  const location = useLocation();
   const navigate = useNavigate();
-  const token = location.state?.token || localStorage.getItem('resetToken');
   const handleSubmit = async (e)=> {
-
+    const token = localStorage.getItem('authToken');
     e.preventDefault();
 
+  
     // تحقق من مطابقة كلمتي المرور
     if (password !== confirmPassword) {
       setInvailed(t('error_message.passwords_mismatch'));
@@ -40,16 +39,17 @@ const SetNewPassword = (darkMode , setDarkMode) => {
           },
         }
       );
-      localStorage.removeItem('resetToken');
+      localStorage.removeItem('authToken');
       // عرض رسالة نجاح
       setShowSuccess(true);
       setInvailed("");
+     
       
       // إعادة التوجيه إلى صفحة تسجيل الدخول بعد نجاح التحديث
       setTimeout(() => {
         setShowSuccess(false);
         navigate('/');
-      }, 4000);
+      }, 3000);
 
     } catch (error) {
       console.error('Password reset failed:', error);

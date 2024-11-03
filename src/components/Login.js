@@ -1,4 +1,4 @@
-import React, { useEffect, useState  , useContext} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../images/logo.svg";
 import Photo1 from "../images/ImageLogin-1.png";
@@ -13,7 +13,6 @@ import IconError from "../images/icons/ERROR.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { login } from "../apiService";
-//import { UserContext } from "./UserContext";
 
 const Login = ({ darkMode, setDarkMode }) => {
   const navigate = useNavigate();
@@ -24,8 +23,6 @@ const Login = ({ darkMode, setDarkMode }) => {
   const [showModalError, setShowModalError] = useState(false);
   const [Invailed, setInvailed] = useState("");
   const [showSuccess , setShowSuccess] = useState(false);
-  //const {updateUser} = useContext(UserContext)
-
   // Images
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,21 +30,14 @@ const Login = ({ darkMode, setDarkMode }) => {
     }, 10000); //change after 10 minutes
     return () => clearInterval(interval);
   }, [Images.length]);
-  
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      navigate("/");
-    }
-  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const credentials = { email, password };
       const response = await login(credentials);
-      console.log("login successful", response);
-    
+      console.log("login successfully " , response)
+      localStorage.setItem('email',email); 
       // عرض نافذة النجاح
       setShowSuccess(true);
       
