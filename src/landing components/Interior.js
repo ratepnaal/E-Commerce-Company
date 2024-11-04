@@ -7,6 +7,8 @@ import FaucetsFrame from '../images/frames/FrameFaucets.png';
 import KitchensFrame from '../images/frames/FrameKitchens.png';
 import ViewAll from '../images/icons/veiwAll.svg';  
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Interior = ({darkMode , setDarkMode}) => {
   const {t} = useTranslation();
@@ -30,13 +32,13 @@ const Interior = ({darkMode , setDarkMode}) => {
             <h2 className={`text-2xl font-semibold text-gray-700 ${darkMode?`text-white`:``}`}>{section.title}</h2>
             <button className="flex items-center bg-teal-900 text-white py-1 px-3 rounded-lg mb-4 hover:bg-teal-950 transition">
               <Link to="/floors"> {t('view_all')}</Link>
-              <img src={ViewAll} alt="View All Icon" className="w-4 h-4 ml-2" />
+              < LazyLoadImage src={ViewAll} alt="View All Icon" className="w-4 h-4 ml-2" />
             </button>
           </div>
 
           {/* Image section*/}
           <div className="flex justify-center">
-            <img src={section.image} alt={`${section.title} Frame`} className="w-full rounded-lg" />
+            < LazyLoadImage src={section.image} alt={`${section.title} Frame`} className="w-full rounded-lg" />
           </div>
         </div>
       ))}

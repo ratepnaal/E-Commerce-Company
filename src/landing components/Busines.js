@@ -16,6 +16,8 @@ import locationIcon from '../images/icons/locationIcon.svg';
 import whatsappIcon from '../images/icons/whatsappIcon.svg';
 import EmailIcon from '../images/icons/ic_outline-email.svg';
 import viewAllIcon from '../images/icons/veiwAll.svg';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Business = ({darkMode , setDarkMode}) => {
   const {t} = useTranslation();
@@ -38,12 +40,12 @@ const Business = ({darkMode , setDarkMode}) => {
             </button>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <img src={interior1} alt="Interior 1" className="w-full h-auto rounded-md" />
-            <img src={interior2} alt="Interior 2" className="w-full h-auto rounded-md" />
-            <img src={interior3} alt="Interior 3" className="w-full h-auto rounded-md" />
-            <img src={interior4} alt="Interior 4" className="w-full h-auto rounded-md" />
-            <img src={interior5} alt="Interior 5" className="w-full h-auto rounded-md" />
-            <img src={interior6} alt="Interior 6" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={interior1} alt="Interior 1" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={interior2} alt="Interior 2" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={interior3} alt="Interior 3" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={interior4} alt="Interior 4" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={interior5} alt="Interior 5" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={interior6} alt="Interior 6" className="w-full h-auto rounded-md" />
           </div>
         </div>
 
@@ -57,12 +59,12 @@ const Business = ({darkMode , setDarkMode}) => {
             </button>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <img src={exterior1} alt="Exterior 1" className="w-full h-auto rounded-md" />
-            <img src={exterior2} alt="Exterior 2" className="w-full h-auto rounded-md" />
-            <img src={exterior3} alt="Exterior 3" className="w-full h-auto rounded-md" />
-            <img src={exterior4} alt="Exterior 4" className="w-full h-auto rounded-md" />
-            <img src={exterior5} alt="Exterior 5" className="w-full h-auto rounded-md" />
-            <img src={exterior6} alt="Exterior 6" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={exterior1} alt="Exterior 1" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={exterior2} alt="Exterior 2" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={exterior3} alt="Exterior 3" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={exterior4} alt="Exterior 4" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={exterior5} alt="Exterior 5" className="w-full h-auto rounded-md" />
+            < LazyLoadImage src={exterior6} alt="Exterior 6" className="w-full h-auto rounded-md" />
           </div>
         </div>
       </div>

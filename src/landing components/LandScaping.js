@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next';
 import ShrubsImage from '../images/frames/FrameShrubs.png';
 import Pavements from '../images/frames/framePavements.png';
 import ViewAllIcon from '../images/icons/veiwAll.svg';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const LandScaping = ({ darkMode, setDarkMode }) => {
   const { t } = useTranslation();
@@ -28,13 +31,13 @@ const LandScaping = ({ darkMode, setDarkMode }) => {
               className={`flex items-center py-1 px-3 rounded-lg mb-4 transition ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-green-700 hover:bg-green-800'} text-white`}
             >
               {t('view_all')}
-              <img src={ViewAllIcon} alt="View All Icon" className="w-4 h-4 ml-2" />
+              < LazyLoadImage src={ViewAllIcon} alt="View All Icon" className="w-4 h-4 ml-2" />
             </button>
           </div>
 
           {/* Photo Frame */}
           <div className="mt-4 ml-5">
-            <img src={section.image} alt={`${section.title} Frame`} className="w-full rounded-lg shadow-md" />
+            < LazyLoadImage src={section.image} alt={`${section.title} Frame`} className="w-full rounded-lg shadow-md" />
           </div>
         </div>
       ))}

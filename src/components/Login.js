@@ -13,8 +13,13 @@ import IconError from "../images/icons/ERROR.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { login } from "../apiService";
+import addNotification from "react-push-notification";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import api from "../api";
 
 const Login = ({ darkMode, setDarkMode }) => {
+  const username = localStorage.getItem('username')
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +28,16 @@ const Login = ({ darkMode, setDarkMode }) => {
   const [showModalError, setShowModalError] = useState(false);
   const [Invailed, setInvailed] = useState("");
   const [showSuccess , setShowSuccess] = useState(false);
+  const handleNotification = ()=>{
+    addNotification({
+      title:'Welcome Back 🎉 ',
+      message:`Hello ${username} ! `,
+      duration:4000,
+      native:true,
+      icon:Logo,
+      onClick:()=>console.log("Push Notification !")
+    })
+  }
   // Images
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,22 +45,25 @@ const Login = ({ darkMode, setDarkMode }) => {
     }, 10000); //change after 10 minutes
     return () => clearInterval(interval);
   }, [Images.length]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const credentials = { email, password };
-      const response = await login(credentials);
+      const response = await api.post('/login', credentials);
       console.log("login successfully " , response)
+
+      const { accessToken, refreshToken } = response.data;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('email',email); 
       // عرض نافذة النجاح
       setShowSuccess(true);
-      
+      handleNotification();   
       // تأخير التنقل حتى تظهر نافذة النجاح
       setTimeout(() => {
         setShowSuccess(false);     // إخفاء النافذة بعد التأخير
         navigate("/profile");
-      }, 4000);                 // تأخير لمدة ثانيتين (يمكنك ضبط الوقت حسب الحاجة)
+      }, 4000);                 // تأخير لمدة ثانيتين
     } catch (error) {
       setInvailed(t("error-message-login-failed"));
       setShowModalError(true);
@@ -67,7 +85,7 @@ const Login = ({ darkMode, setDarkMode }) => {
           <p className="text-3xl font-semibold text-center mb-8">
             {t("subtitle")}
           </p>
-          <img src={Logo} alt="Logo" className="h-16 mb-8" />
+          <LazyLoadImage src={Logo} alt="Logo" className="h-16 mb-8" />
           <form
             onSubmit={handleSubmit}
             autoComplete="on"
@@ -174,7 +192,18 @@ const Login = ({ darkMode, setDarkMode }) => {
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
-          ></div>
+          >
+             <LazyLoadImage
+              src={Images[currentImage]}
+              alt={`Image ${currentImage + 1}`}
+              effect="blur"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
         </div>
       </div>
       {/**ERROR window*/}

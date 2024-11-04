@@ -5,6 +5,8 @@ import Logo from "../images/logo.svg";
 import BackgroundImage from "../images/ImageLogin-6.png";
 import { useNavigate } from "react-router-dom";
 import IconError from "../images/icons/ERROR.svg";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 const ChangePassword = (darkMode , setDarkMode) => {
   const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
@@ -39,7 +41,7 @@ const ChangePassword = (darkMode , setDarkMode) => {
       <div className="flex flex-grow">
         {/* Lift Section*/}
         <div className="hidden lg:w-1/2 lg:flex justify-center items-center relative">
-          <img
+          <LazyLoadImage
             src={BackgroundImage}
             alt="Background"
             className="w-full h-full object-cover"
@@ -47,7 +49,7 @@ const ChangePassword = (darkMode , setDarkMode) => {
 
           <div className="absolute">
             <div className="w-[250px] h-[250px] bg-white rounded-full opacity-80 flex items-center justify-center">
-              <img src={Logo} alt="Logo" className="h-28" />
+              <LazyLoadImage src={Logo} alt="Logo" className="h-28" />
             </div>
           </div>
         </div>

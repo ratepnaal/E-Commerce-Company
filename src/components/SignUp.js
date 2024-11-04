@@ -10,6 +10,8 @@ import phoneIcon from "../images/icons/phone.svg";
 import IconError from "../images/icons/ERROR.svg";
 import { useTranslation } from "react-i18next";
 import { signUp } from "../apiService";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const SignUp = ({ darkMode, setDarkMode }) => {
   const [email, setEmail] = useState("");
@@ -23,8 +25,7 @@ const SignUp = ({ darkMode, setDarkMode }) => {
   const [photo, setPhoto] = useState(null);
   const [Invailed, setInvailed] = useState("");
   const [preview, setPreview] = useState("https://via.placeholder.com/80"); // رابط الصورة الافتراضية
-  const [showModalError, setShowModalError] = useState(false);
-  const [showSuccess , setShowSuccess] = useState(false)
+  const [showSuccess , setShowSuccess] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const fileInputRef = useRef(null);
@@ -99,7 +100,7 @@ try {                      // send information to api
       <div className="flex flex-grow">
         {/* Left section */}
         <div className="hidden lg:w-1/2 lg:flex justify-center items-center relative">
-          <img
+          <LazyLoadImage
             src={backgroundSignUp}
             alt={t("background")}
             className="w-full h-full object-cover"
@@ -108,7 +109,7 @@ try {                      // send information to api
           {/* Circle */}
           <div className="absolute">
             <div className="w-[250px] h-[250px] bg-white rounded-full opacity-80 flex items-center justify-center">
-              <img src={Logo} alt={t("logo")} className="h-28" />
+              <LazyLoadImage src={Logo} alt={t("logo")} className="h-28" />
             </div>
           </div>
         </div>
@@ -133,7 +134,7 @@ try {                      // send information to api
                   className="w-[80px] h-[80px] bg-gray-300 rounded-full flex items-center justify-center"
                   onClick={handleImageClick}
                 >
-                  <img
+                  <LazyLoadImage
                     src={preview}
                     alt={t("profile_picture")}
                     className="w-full h-full rounded-full"
@@ -396,49 +397,32 @@ try {                      // send information to api
 
       {/* Footer */}
       <footer className="w-full h-[45px] bg-[#1c5268] flex flex-shrink-0"></footer>
-     {/* ERROR Modal */}
-     {showModalError && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-2xl shadow-lg text-center fade-in" style={{ width: "300px", animation: "fadeIn 0.5s", borderRadius: "20px" }}>
-            <h2 className="text-lg font-semibold text-black mb-4">{t('title')}</h2>
-            <p className="text-gray-600 mb-2 text-xs">{t('message')}</p>
-            <hr className="w-4/5 border-b-2 border-gray-400 mx-auto my-4" />
-            <button
-              onClick={() => setShowModalError(false)}
-              className="text-red-500 font-semibold hover:underline text-xs"
-            >
-              {t('dismiss_button')}
-            </button>
-          </div>
-        </div>
-      )}
         {/**Success window*/}
         {showSuccess && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className={`fixed inset-0 flex items-center justify-center   ${darkMode?`bg-gray-800 text-white`:`bg-black bg-opacity-50`}`}>
           <div
-            className="bg-white p-4 rounded-2xl shadow-lg text-center fade-in"
+            className={` p-4 rounded-2xl shadow-lg text-center fade-in ${darkMode?`bg-gray-800 text-white`:`bg-white`}`}
             style={{
               width: "300px",
               animation: "fadeIn 0.5s",
               borderRadius: "20px",
             }}
           >
-            <h2 className="text-lg font-semibold text-black mb-4">
-              {t("title-of-succsess-sign-up")}
+            <h2 className={`text-lg font-semibold mb-4 ${darkMode?`text-white`:`text-black`}`}>
+              {t("title-of-succsess-changed")}
             </h2>
-            <p className="text-gray-600 mb-2 text-xs">{t("message-of-success-sign-up")}</p>
+            <p className={`text-gray-600 mb-2 text-xs ${darkMode?`text-white`:`text-gray-600`}`}>{t("login-new-password")}</p>
             <hr className="w-4/5 border-b-2  border-gray-400 mx-auto my-4" />
 
             <button
               onClick={() => setShowSuccess(false)}
               className="text-green-600 font-semibold hover:underline text-xs"
             >
-              {t("close-success-button")}
+              {t("close-success-button")};
             </button>
           </div>
         </div>
-      )}
-    </div>
+      )}    </div>
   );
 };
 

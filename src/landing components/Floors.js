@@ -8,6 +8,8 @@ import ShadeType3 from '../images/floorImage/floor5.png';
 import ShadeType4 from '../images/floorImage/floor6.png';
 import ShadeType5 from '../images/floorImage/floor7.png';
 import Header from './Header';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Floors = () => {
   const {t} = useTranslation();
@@ -31,7 +33,7 @@ const Floors = () => {
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-8 mt-8">
         {floorImages.map((floor, index) => (
           <div key={index} className="flex flex-col items-center">
-            <img src={floor.src} alt={floor.label} className="w-4/5 rounded-sm shadow-lg" />
+            < LazyLoadImage src={floor.src} alt={floor.label} className="w-4/5 rounded-sm shadow-lg" />
             <p className="text-center mt-4 text-sm font-medium text-gray-700">{floor.label}</p>
           </div>
         ))}

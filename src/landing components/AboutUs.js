@@ -5,6 +5,9 @@ import ShadowFakeVedio from '../images/ShadowVedio.png';
 import ExitVedioIcon from '../images/icons/ExitVedioIcon.svg'; 
 import PlayVedio from '../images/icons/playVedio.svg'; 
 import DarkModeToggle from '../components/DarkModeToggle';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const AboutUs = ({ darkMode, setDarkMode }) => {
   const { t } = useTranslation(); 
@@ -46,18 +49,18 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
 
       <div className="relative mt-8">
         <div className="relative cursor-pointer" onClick={handleVideoClick}>
-          <img src={FakeVedio} alt="Fake Video" className="w-full" />
+          < LazyLoadImage src={FakeVedio} alt="Fake Video" className="w-full" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <img src={PlayVedio} alt="Play Icon" className="h-16 w-16 cursor-pointer" />
+            < LazyLoadImage src={PlayVedio} alt="Play Icon" className="h-16 w-16 cursor-pointer" />
           </div>
-          <img src={ShadowFakeVedio} alt="Video Shadow" className="absolute top-0 left-0 w-full h-full pointer-events-none" />
+          < LazyLoadImage src={ShadowFakeVedio} alt="Video Shadow" className="absolute top-0 left-0 w-full h-full pointer-events-none" />
         </div>
 
         {isVideoOpen && (
           <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-90">
-            <img src={FakeVedio} alt="Full Screen Video" className="w-full h-full object-cover" />
+            < LazyLoadImage src={FakeVedio} alt="Full Screen Video" className="w-full h-full object-cover" />
             <button className="absolute top-8" onClick={handleCloseVideo}>
-              <img src={ExitVedioIcon} alt="Exit Video" className="h-10 w-10" />
+              < LazyLoadImage src={ExitVedioIcon} alt="Exit Video" className="h-10 w-10" />
             </button>
           </div>
         )}

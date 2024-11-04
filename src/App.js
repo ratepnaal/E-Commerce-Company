@@ -13,6 +13,7 @@ import LanguageSelector from './components/LanguageSelector ';
 import VerifyResetCode from './components/VerifyResetCode';
 import SetNewPassword from './components/SetNewPassword';
 import { useTranslation } from 'react-i18next';
+import PrivateRoute from './PrivateRoute';
 
 const App = () => {
   const [darkMode , setDarkMode] = useState(false);
@@ -56,9 +57,32 @@ const App = () => {
           <Route path='/change-password' element = {<ChangePassword darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
           <Route path='/sign-up' element = {<SignUp darkMode = {darkMode} setDarkMode={setDarkMode}/>}/>
           <Route path='/verification' element = {<Verification darkMode = {darkMode} setDarkMode = {setDarkMode}/>}/>
-          <Route path='/profile' element = {<Profile darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
-          <Route path='landing' element = {<LandingPage darkMode= {darkMode} setDarkMode = {setDarkMode} />}/>
-          <Route path='/floors' element = {<Floors darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
+       
+            {/* حماية الراوتات باستخدام PrivateRoute */}
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile darkMode={darkMode} setDarkMode={setDarkMode} />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/landing"
+              element={
+                <PrivateRoute>
+                  <LandingPage darkMode={darkMode} setDarkMode={setDarkMode} />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/floors"
+              element={
+                <PrivateRoute>
+                  <Floors darkMode={darkMode} setDarkMode={setDarkMode} />
+                </PrivateRoute>
+              }
+            />
           <Route path='/verify-code' element = {<VerifyResetCode darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
           <Route path='/set-password' element = {<SetNewPassword darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
         </Routes>

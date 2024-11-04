@@ -5,6 +5,8 @@ import Logo from '../images/logo.svg';
 import BackgroundImage from '../images/ImageLogin-6.png'; 
 import { useNavigate  } from 'react-router-dom';
 import IconError from "../images/icons/ERROR.svg";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 const SetNewPassword = (darkMode , setDarkMode) => {
   const [showSuccess , setShowSuccess] = useState(false);
   const [Invailed, setInvailed] = useState("");
@@ -63,11 +65,11 @@ const SetNewPassword = (darkMode , setDarkMode) => {
       <div className="flex flex-grow">
         {/* Left Section*/}
         <div className="hidden lg:w-1/2 lg:flex justify-center items-center relative">
-          <img src={BackgroundImage} alt="Background" className="w-full h-full object-cover" />
+          <LazyLoadImage src={BackgroundImage} alt="Background" className="w-full h-full object-cover" />
           
           <div className="absolute">
             <div className="w-[250px] h-[250px] bg-white rounded-full opacity-80 flex items-center justify-center">
-              <img src={Logo} alt="Logo" className="h-28" />
+              <LazyLoadImage src={Logo} alt="Logo" className="h-28" />
             </div>
           </div>
         </div>
@@ -129,19 +131,19 @@ const SetNewPassword = (darkMode , setDarkMode) => {
       </div>
               {/**Success window*/}
        {showSuccess && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className={`fixed inset-0 flex items-center justify-center   ${darkMode?`bg-gray-800 text-white`:`bg-black bg-opacity-50`}`}>
           <div
-            className="bg-white p-4 rounded-2xl shadow-lg text-center fade-in"
+            className={` p-4 rounded-2xl shadow-lg text-center fade-in ${darkMode?`bg-gray-800 text-white`:`bg-white`}`}
             style={{
               width: "300px",
               animation: "fadeIn 0.5s",
               borderRadius: "20px",
             }}
           >
-            <h2 className="text-lg font-semibold text-black mb-4">
+            <h2 className={`text-lg font-semibold mb-4 ${darkMode?`text-white`:`text-black`}`}>
               {t("title-of-succsess-changed")}
             </h2>
-            <p className="text-gray-600 mb-2 text-xs">{t("login-new-password")}</p>
+            <p className={`text-gray-600 mb-2 text-xs ${darkMode?`text-white`:`text-gray-600`}`}>{t("login-new-password")}</p>
             <hr className="w-4/5 border-b-2  border-gray-400 mx-auto my-4" />
 
             <button

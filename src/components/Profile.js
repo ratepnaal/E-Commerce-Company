@@ -10,7 +10,8 @@ import Lawn from "../images/the lawn.png";
 import Header from "../landing components/Header";
 import IconLogout from "../images/icons/Logout.svg";
 import DarkModeToggle from "./DarkModeToggle";
-import { BiPhone } from "react-icons/bi";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Profile = ({ darkMode, setDarkMode }) => {
   const email = localStorage.getItem('email');
@@ -66,12 +67,12 @@ const Profile = ({ darkMode, setDarkMode }) => {
       <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
       {/* Background image */}
       <div className="relative">
-        <img
+        <LazyLoadImage
           src={BackgroundProfile}
           alt="Background"
           className="w-full h-64 object-cover"
         />
-        <img
+        <LazyLoadImage
           src={BackgroundShadow}
           alt="Shadow"
           className="absolute top-0 left-0 w-full h-full "
@@ -83,11 +84,11 @@ const Profile = ({ darkMode, setDarkMode }) => {
         {/* Lawn section (25%) */}
         <div className="w-2/5  relative">
           <div className="absolute bottom-0 left-0">
-            <img src={Lawn} alt="Lawn" className="w-full h-auto object-cover" />
+            <LazyLoadImage src={Lawn} alt="Lawn" className="w-full h-auto object-cover" />
           </div>
           <div className="relative  ml-8">
             <div className="relative w-40 h-40 ">
-              <img
+              <LazyLoadImage
                 src={photo||profileImage} // اما صورة المستخدم اذا ادخلها او الصورة الافتراضية
                 alt="Profile"
                 className="w-full h-full rounded-full border-4 border-white "

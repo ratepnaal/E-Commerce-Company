@@ -127,15 +127,15 @@ const Verification = ({ darkMode, setDarkMode }) => {
       </button>
 
       {signed && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 `}>
           <div
-            className="bg-white p-6 rounded-3xl shadow-lg w-80 text-center fade-in"
+            className={` p-6 rounded-3xl shadow-lg w-80 text-center fade-in ${darkMode?`bg-gray-800 text-white`:`bg-white`}`}
             style={{ animation: "fadeIn 0.5s", borderRadius: "20px" }}
           >
-            <h2 className="text-lg font-semibold text-black mb-4">
+            <h2 className={`text-lg font-semibold  mb-4 ${darkMode?`text-white`:`text-black`}`}>
               {t("signed_up")}
             </h2>
-            <p className="text-gray-600 mb-2 text-xs">
+            <p className={` mb-2 text-xs ${darkMode?`text-white`:`text-gray-600`}`}>
               {t("your_account_is_successfully_verified")}
             </p>
             <hr className="w-4/5 border-b-2 border-gray-400 mx-auto my-4" />
