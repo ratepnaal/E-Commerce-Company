@@ -26,16 +26,23 @@ const Login = ({ darkMode, setDarkMode }) => {
   const [showModalError, setShowModalError] = useState(false);
   const [Invailed, setInvailed] = useState("");
   const [showSuccess , setShowSuccess] = useState(false);
-  const handleNotification = ()=>{
-    addNotification({
-      title:'Welcome Back 🎉 ',
-      message:`Hello ${username} ! `,
-      duration:4000,
-      native:true,
-      icon:Logo,
-      onClick:()=>console.log("Push Notification !")
-    })
-  }
+  const handleNotification = () => {
+    // طلب الإذن من المستخدم
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        addNotification({
+          title: 'Welcome Back 🎉',
+          message: `Hello ${username} ! `,
+          duration: 4000,
+          native: true,
+          icon: Logo,
+          onClick: () => console.log("Push Notification!")
+        });
+      } else {
+        console.log("Notification permission denied");
+      }
+    });
+  };
   // Images
   useEffect(() => {
     const interval = setInterval(() => {
@@ -192,16 +199,6 @@ const Login = ({ darkMode, setDarkMode }) => {
               backgroundPosition: "center",
             }}
           >
-             <LazyLoadImage
-              src={Images[currentImage]}
-              alt={`Image ${currentImage + 1}`}
-              effect="blur"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-              }}
-            />
           </div>
         </div>
       </div>
