@@ -4,7 +4,6 @@ import IntroPhoto from '../images/IntroPhoto.png';
 import ShadowIntro from '../images/ShadowIntroPhoto.png'; 
 import SearchIcon from '../images/icons/Searsh.svg'
 import DarkModeToggle from '../components/DarkModeToggle';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -12,7 +11,6 @@ const Intro = ({ darkMode , setDarkMode }) => {
   const {t} = useTranslation();
   return (
     <div>
-      <LazyLoadComponent>
          <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url(${IntroPhoto})` }}>
       {/* Shadow of background*/}
       <div 
@@ -39,7 +37,6 @@ const Intro = ({ darkMode , setDarkMode }) => {
         </div>
       </div>
     </div>
-    </LazyLoadComponent>
     </div>
 
  

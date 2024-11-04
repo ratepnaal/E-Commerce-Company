@@ -37,7 +37,7 @@ const ChangePassword = (darkMode , setDarkMode) => {
   };
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">
-       <LazyLoadComponent >
+
       <header className="w-full h-[50px] bg-[#1c5268] "></header>
 
       <div className="flex flex-grow">
@@ -136,7 +136,6 @@ const ChangePassword = (darkMode , setDarkMode) => {
           </div>
         </div>
       )}
-      </LazyLoadComponent>
     </div>
   );
 };

@@ -12,7 +12,6 @@ import IconLogout from "../images/icons/Logout.svg";
 import DarkModeToggle from "./DarkModeToggle";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
 const Profile = ({ darkMode, setDarkMode }) => {
   const email = localStorage.getItem('email');
   const full_name = localStorage.getItem('username');
@@ -65,7 +64,6 @@ const Profile = ({ darkMode, setDarkMode }) => {
     <div className="relative pt-0">
       <Header />
       <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
-      <LazyLoadComponent >
       {/* Background image */}
       <div className="relative">
         <LazyLoadImage
@@ -184,7 +182,7 @@ const Profile = ({ darkMode, setDarkMode }) => {
           </div>
         </div>
       )}
-      </LazyLoadComponent>
+
     </div>
   );
 };

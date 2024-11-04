@@ -9,7 +9,6 @@ import ViewAll from '../images/icons/veiwAll.svg';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
 const Interior = ({darkMode , setDarkMode}) => {
   const {t} = useTranslation();
   const sections = [
@@ -22,7 +21,6 @@ const Interior = ({darkMode , setDarkMode}) => {
 
   return (
     <div className="space-y-8">
-       <LazyLoadComponent >
       {/* The Tittle */}
       <h2 className={`text-3xl font-medium text-center py-5 bg-blue-200 ${darkMode?`bg-gray-800`:``}`}>{t('interior_cladding')}</h2>
 
@@ -43,7 +41,6 @@ const Interior = ({darkMode , setDarkMode}) => {
           </div>
         </div>
       ))}
-      </LazyLoadComponent>
     </div>
   );
 };

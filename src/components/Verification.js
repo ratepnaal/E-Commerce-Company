@@ -4,8 +4,6 @@ import MailPhoto from "../images/verification.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
-
 const Verification = ({ darkMode, setDarkMode }) => {
   const location = useLocation();
   const [signed, setSigned] = useState(false);
@@ -72,7 +70,6 @@ const Verification = ({ darkMode, setDarkMode }) => {
         darkMode ? "bg-gray-900 text-white" : ""
       }`}
     >
-       <LazyLoadComponent >
       <div className="relative w-full h-[200px] flex justify-center items-center">
         <img
           src={MailPhoto}
@@ -153,7 +150,7 @@ const Verification = ({ darkMode, setDarkMode }) => {
           </div>
         </div>
       )}
-      </LazyLoadComponent>
+
     </div>
   );
 };

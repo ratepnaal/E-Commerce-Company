@@ -7,7 +7,6 @@ import PlayVedio from '../images/icons/playVedio.svg';
 import DarkModeToggle from '../components/DarkModeToggle';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const AboutUs = ({ darkMode, setDarkMode }) => {
   const { t } = useTranslation(); 
@@ -23,7 +22,6 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
 
   return (
     <div className={`relative bg-gray-100 ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-       <LazyLoadComponent >
       <h2 className={`text-3xl font-medium text-center py-5 bg-blue-200  h-full w-full ${darkMode?`bg-gray-800`:``}`} >
         {t('about_us')}
       </h2>
@@ -68,7 +66,6 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
         )}
       
       </div>
-      </LazyLoadComponent>
     </div>
   );
 };
