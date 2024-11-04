@@ -7,7 +7,7 @@ import PlayVedio from '../images/icons/playVedio.svg';
 import DarkModeToggle from '../components/DarkModeToggle';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const AboutUs = ({ darkMode, setDarkMode }) => {
   const { t } = useTranslation(); 
@@ -23,11 +23,13 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
 
   return (
     <div className={`relative bg-gray-100 ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+       <LazyLoadComponent >
       <h2 className={`text-3xl font-medium text-center py-5 bg-blue-200  h-full w-full ${darkMode?`bg-gray-800`:``}`} >
         {t('about_us')}
       </h2>
       <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
       <div className="flex h-full w-full">
+        
         <div className='w-full md:w-1/2 h-full flex-row px-5 py-5'>
           <p className='font-bold text-sm uppercase'>{t('welcome')}</p>
           <p className='text-xs uppercase font-medium'>{t('welcome_text')}</p>
@@ -46,7 +48,7 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
           <p className='text-xs uppercase font-medium'>{t('why_choose_us_text')}</p>
         </div>
       </div>
-
+     
       <div className="relative mt-8">
         <div className="relative cursor-pointer" onClick={handleVideoClick}>
           < LazyLoadImage src={FakeVedio} alt="Fake Video" className="w-full" />
@@ -55,7 +57,7 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
           </div>
           < LazyLoadImage src={ShadowFakeVedio} alt="Video Shadow" className="absolute top-0 left-0 w-full h-full pointer-events-none" />
         </div>
-
+      
         {isVideoOpen && (
           <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-90">
             < LazyLoadImage src={FakeVedio} alt="Full Screen Video" className="w-full h-full object-cover" />
@@ -64,7 +66,9 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
             </button>
           </div>
         )}
+      
       </div>
+      </LazyLoadComponent>
     </div>
   );
 };

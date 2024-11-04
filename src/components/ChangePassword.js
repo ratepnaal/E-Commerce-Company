@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import IconError from "../images/icons/ERROR.svg";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 const ChangePassword = (darkMode , setDarkMode) => {
   const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
@@ -36,6 +37,7 @@ const ChangePassword = (darkMode , setDarkMode) => {
   };
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">
+       <LazyLoadComponent >
       <header className="w-full h-[50px] bg-[#1c5268] "></header>
 
       <div className="flex flex-grow">
@@ -134,6 +136,7 @@ const ChangePassword = (darkMode , setDarkMode) => {
           </div>
         </div>
       )}
+      </LazyLoadComponent>
     </div>
   );
 };

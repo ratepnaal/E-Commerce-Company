@@ -10,7 +10,7 @@ import ShadeType5 from '../images/floorImage/floor7.png';
 import Header from './Header';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 const Floors = () => {
   const {t} = useTranslation();
   const floorImages = [
@@ -25,6 +25,7 @@ const Floors = () => {
   return (
     <div>
         <Header/>
+        <LazyLoadComponent >
          <div className=" bg-blue-50 min-h-screen">
       {/* Main tittle */}
       <h1 className="text-3xl font-semibold pl-5 py-5 bg-blue-200">{t('images')}</h1>
@@ -39,6 +40,7 @@ const Floors = () => {
         ))}
       </div>
     </div>
+    </LazyLoadComponent>
     </div>
    
   );

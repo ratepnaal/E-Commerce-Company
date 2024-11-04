@@ -5,7 +5,7 @@ import Pavements from '../images/frames/framePavements.png';
 import ViewAllIcon from '../images/icons/veiwAll.svg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const LandScaping = ({ darkMode, setDarkMode }) => {
   const { t } = useTranslation();
@@ -17,6 +17,7 @@ const LandScaping = ({ darkMode, setDarkMode }) => {
   return (
     <div className={`pt-5 min-h-screen ${darkMode ? 'bg-gray-800 text-white' : 'bg-green-50 text-black'}`} id="land">
       {/* Main Title */}
+      <LazyLoadComponent >
       <h2 className={`text-3xl font-medium text-center py-5 mb-5 ${darkMode ? 'bg-gray-800 text-white' : 'bg-green-300 text-gray-700'}`}>
         {t('landscaping_department')}
       </h2>
@@ -41,6 +42,7 @@ const LandScaping = ({ darkMode, setDarkMode }) => {
           </div>
         </div>
       ))}
+      </LazyLoadComponent>
     </div>
   );
 };

@@ -18,11 +18,13 @@ import EmailIcon from '../images/icons/ic_outline-email.svg';
 import viewAllIcon from '../images/icons/veiwAll.svg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const Business = ({darkMode , setDarkMode}) => {
   const {t} = useTranslation();
   return (
     <div className={`bg-blue-300 p-8 ${darkMode?`bg-gray-800 text-white`:``}`}>
+       <LazyLoadComponent >
       {/* Tittle section */}
       <h1 className={`text-4xl font-semibold text-center mb-8 ${darkMode?`text-white`:``}`} >
      {t('Business-exhibition')}
@@ -87,6 +89,7 @@ const Business = ({darkMode , setDarkMode}) => {
           <span className='text-xs md:text-sm font-medium'>{t('email_contact')}</span>
         </div>
       </div>
+      </LazyLoadComponent>
     </div>
   );
 };

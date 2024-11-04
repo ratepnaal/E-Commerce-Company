@@ -17,7 +17,7 @@ import addNotification from "react-push-notification";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import api from "../api";
-
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 const Login = ({ darkMode, setDarkMode }) => {
   const username = localStorage.getItem('username')
   const navigate = useNavigate();
@@ -74,6 +74,7 @@ const Login = ({ darkMode, setDarkMode }) => {
 
   return (
     <div className=" h-screen w-screen flex flex-col flex-grow ">
+       <LazyLoadComponent >
       {/* Header*/}
       <header className="w-full h-[50px] bg-[#1c5268] "></header>
       <div className="flex flex-grow">
@@ -258,6 +259,7 @@ const Login = ({ darkMode, setDarkMode }) => {
           </div>
         </div>
       )}
+      </LazyLoadComponent>
     </div>
   );
 };
