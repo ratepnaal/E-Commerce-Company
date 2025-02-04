@@ -23,45 +23,45 @@ const Verification = ({ darkMode, setDarkMode }) => {
 
   // دالة إرسال الطلب إلى API
   const handleSigned = async () => {
-    try {
-      const verificationCode = code.join(""); // تحويل الكود إلى نص كامل
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("code", verificationCode);
+    // try {
+    //   const verificationCode = code.join(""); // تحويل الكود إلى نص كامل
+    //   const formData = new FormData();
+    //   formData.append("email", email);
+    //   formData.append("code", verificationCode);
 
-      const response = await axios.post(
-        "https://backendsec3.trainees-mad-s.com/api/verify-email",
-        formData
-      );
+    //   const response = await axios.post(
+    //     "https://backendsec3.trainees-mad-s.com/api/verify-email",
+    //     formData
+    //   );
 
-      console.log("Verification successful:", response.data);
-      const token = response.data.token;
-      localStorage.setItem("authToken", token);
-      setSigned(true); // إظهار رسالة النجاح
-    } catch (error) {
-      console.error("Verification failed:", error);
-      setError(t("error_message.verification_failed")); // عرض رسالة خطأ عند فشل التحقق
-    }
+    //   console.log("Verification successful:", response.data);
+    //   const token = response.data.token;
+    //   localStorage.setItem("authToken", token);
+       setSigned(true); // إظهار رسالة النجاح
+    // } catch (error) {
+    //   console.error("Verification failed:", error);
+    //   setError(t("error_message.verification_failed")); // عرض رسالة خطأ عند فشل التحقق
+    // }
   };
   // دالة إعادة إرسال الكود
   const handleResendCode = async () => {
-    const token = localStorage.getItem("authToken"); // جلب التوكن من localStorage
+    // const token = localStorage.getItem("authToken"); // جلب التوكن من localStorage
 
-    try {
-      const formData = new FormData();
-      formData.append("email", email);
-      const response = await axios.post(
-        "https://backendsec3.trainees-mad-s.com/api/resend-verification-code",
-        formData,
-        token
-      );
-      console.log("Code resent successfully:", response.data);
-      setResendSuccess(t("code_resent_successfully")); // عرض رسالة نجاح
-    } catch (error) {
-      console.error("Resend code failed:", error);
-      setError(t("error_message.resend_failed")); // عرض رسالة خطأ عند فشل إعادة الإرسال
-      setResendSuccess(""); // إعادة تعيين رسالة النجاح
-    }
+    // try {
+    //   const formData = new FormData();
+    //   formData.append("email", email);
+    //   const response = await axios.post(
+    //     "https://backendsec3.trainees-mad-s.com/api/resend-verification-code",
+    //     formData,
+    //     token
+    //   );
+    //   console.log("Code resent successfully:", response.data);
+    //   setResendSuccess(t("code_resent_successfully")); // عرض رسالة نجاح
+    // } catch (error) {
+    //   console.error("Resend code failed:", error);
+    //   setError(t("error_message.resend_failed")); // عرض رسالة خطأ عند فشل إعادة الإرسال
+     setResendSuccess(""); // إعادة تعيين رسالة النجاح
+    // }
   };
 
   return (
