@@ -25,24 +25,24 @@ const SetNewPassword = (darkMode , setDarkMode) => {
       return;
     }
 
-    try {
-      // إعداد بيانات الطلب
-      const formData = new FormData();
-      formData.append('password', password);
-      formData.append('password_confirmation', confirmPassword);
+    // try {
+    //   // إعداد بيانات الطلب
+    //   const formData = new FormData();
+    //   formData.append('password', password);
+    //   formData.append('password_confirmation', confirmPassword);
 
-      // إرسال الطلب إلى API لتحديث كلمة المرور
-      await axios.post(
-        'https://backendsec3.trainees-mad-s.com/api/user/password/reset-password',
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, 
-          },
-        }
-      );
-      localStorage.removeItem('authToken');
-      // عرض رسالة نجاح
+    //   // إرسال الطلب إلى API لتحديث كلمة المرور
+    //   await axios.post(
+    //     'https://backendsec3.trainees-mad-s.com/api/user/password/reset-password',
+    //     formData,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`, 
+    //       },
+    //     }
+    //   );
+    //   localStorage.removeItem('authToken');
+    //   // عرض رسالة نجاح
       setShowSuccess(true);
       setInvailed("");
      
@@ -53,10 +53,10 @@ const SetNewPassword = (darkMode , setDarkMode) => {
         navigate('/');
       }, 3000);
 
-    } catch (error) {
-      console.error('Password reset failed:', error);
-      setInvailed(t('error_message.reset_failed'));
-    }
+    // } catch (error) {
+    //   console.error('Password reset failed:', error);
+    //   setInvailed(t('error_message.reset_failed'));
+    // }
   };
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">
