@@ -60,33 +60,33 @@ const SignUp = ({ darkMode, setDarkMode }) => {
       return;
     }
 
-try {                      // send information to api 
+// try {                      // send information to api 
 
-  const formData = new FormData();
-  formData.append("full_name", fullName);
-  formData.append("phone", phone);
-  formData.append("address", `${country}, ${city}`);
-  formData.append("email", email);
-  formData.append("password", password);
-      const response =  await signUp(formData);
-      localStorage.setItem('email', email);
-        localStorage.setItem('username', fullName);
-        localStorage.setItem('number' , phone);
-        localStorage.setItem('address' , `${country} , ${city}`);
-        localStorage.setItem('photo', photo );
-      console.log(localStorage.getItem('username'))
-      console.log("Sign Up Successful:", response);
-        setShowSuccess(true); 
-        setTimeout(() => {
-          setShowSuccess(false);     // إخفاء النافذة بعد التأخير
-          navigate('/verification', { state: { email } });
-        }, 4000);            
+//   const formData = new FormData();
+//   formData.append("full_name", fullName);
+//   formData.append("phone", phone);
+//   formData.append("address", `${country}, ${city}`);
+//   formData.append("email", email);
+//   formData.append("password", password);
+//       const response =  await signUp(formData);
+//       localStorage.setItem('email', email);
+//         localStorage.setItem('username', fullName);
+//         localStorage.setItem('number' , phone);
+//         localStorage.setItem('address' , `${country} , ${city}`);
+//         localStorage.setItem('photo', photo );
+//       console.log(localStorage.getItem('username'))
+//       console.log("Sign Up Successful:", response);
+         setShowSuccess(true); 
+         setTimeout(() => {
+           setShowSuccess(false);     // إخفاء النافذة بعد التأخير
+           navigate('/verification', { state: { email } });
+         }, 4000);            
 
-          // توجيه المستخدم إلى صفحة التحقق مع تمرير البريد الإلكتروني
-    } catch (error) {
-      console.error("Sign Up Error:", error);
-      setInvailed(t("error-message-signup-failed"));
-    }
+//           // توجيه المستخدم إلى صفحة التحقق مع تمرير البريد الإلكتروني
+//     } catch (error) {
+//       console.error("Sign Up Error:", error);
+//       setInvailed(t("error-message-signup-failed"));
+//     }
   };
   return (
     <div
