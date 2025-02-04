@@ -52,16 +52,17 @@ const Login = ({ darkMode, setDarkMode }) => {
   }, [Images.length]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const credentials = { email, password };
-      const response = await api.post('/login', credentials);
-      console.log("login successfully " , response)
+    // ارسال البيانات للداتابيز عندما كان السيرفر يعمل 
+    // try {
+    //   const credentials = { email, password };
+    //   const response = await api.post('/login', credentials);
+    //   console.log("login successfully " , response)
 
-      const { accessToken, refreshToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('email',email); 
-      // عرض نافذة النجاح
+    //   const { accessToken, refreshToken } = response.data;
+    //   localStorage.setItem('accessToken', accessToken);
+    //   localStorage.setItem('refreshToken', refreshToken);
+    //   localStorage.setItem('email',email); 
+    //   // عرض نافذة النجاح
       setShowSuccess(true);
       handleNotification();   
       // تأخير التنقل حتى تظهر نافذة النجاح
@@ -69,10 +70,10 @@ const Login = ({ darkMode, setDarkMode }) => {
         setShowSuccess(false);     // إخفاء النافذة بعد التأخير
         navigate("/profile");
       }, 4000);                 // تأخير لمدة ثانيتين
-    } catch (error) {
-      setInvailed(t("error-message-login-failed"));
-      setShowModalError(true);
-    }
+    // } catch (error) {
+    //   setInvailed(t("error-message-login-failed"));
+    //   setShowModalError(true);
+    // }
   };
   
   const { t } = useTranslation();
