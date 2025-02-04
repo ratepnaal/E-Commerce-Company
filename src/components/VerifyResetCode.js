@@ -24,28 +24,28 @@ const VerifyResetCode = ({darkMode , setDarkMode}) => {
 
   // دالة إرسال الطلب إلى API
   const handleSigned = async () => {
-    try {
-      const verificationCode = code.join(''); // تحويل الكود إلى نص كامل
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('code', verificationCode);
+    // try {
+    //   const verificationCode = code.join(''); // تحويل الكود إلى نص كامل
+    //   const formData = new FormData();
+    //   formData.append('email', email);
+    //   formData.append('code', verificationCode);
 
-      const response = await axios.post('https://backendsec3.trainees-mad-s.com/api/user/password/verify-forgot-Password-code', formData);
-      console.log('Verification successful:', response.data);
-      // تخزين التوكن في localStorage لاستخدامه لاحقًا
-      const token = response.data.token; 
-      localStorage.setItem('authToken', token);
-        // إظهار رسالة النجاح
-      setSigned(true);
-      setTimeout(() => {
+    //   const response = await axios.post('https://backendsec3.trainees-mad-s.com/api/user/password/verify-forgot-Password-code', formData);
+    //   console.log('Verification successful:', response.data);
+    //   // تخزين التوكن في localStorage لاستخدامه لاحقًا
+    //   const token = response.data.token; 
+    //   localStorage.setItem('authToken', token);
+    //     // إظهار رسالة النجاح
+       setSigned(true);
+       setTimeout(() => {
         setSigned(false);
         navigate("/set-password");
-      }, 3000);
+       }, 3000);
                              
-    } catch (error) {
-      console.error('Verification failed:', error);
-      setError(t('error_message.verification_failed')); // عرض رسالة خطأ عند فشل التحقق
-    }
+    // } catch (error) {
+    //   console.error('Verification failed:', error);
+    //   setError(t('error_message.verification_failed')); // عرض رسالة خطأ عند فشل التحقق
+    // }
   };
   return (
     <div className={`flex flex-col items-center justify-center min-h-screen bg-[#F0F8FF] ${darkMode ? 'bg-gray-900 text-white' : ''}`}>
