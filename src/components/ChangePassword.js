@@ -18,22 +18,22 @@ const ChangePassword = (darkMode , setDarkMode) => {
 
     e.preventDefault();
 
-    try {
-      const formData = new FormData();
-      formData.append("email", email);
-      const response = await axios.post(
-        "https://backendsec3.trainees-mad-s.com/api/user/password/forgot-password",
-        formData
-      );
-      console.log("send email to api successfully", response.data);
-      setShowSuccess(true);
-      setTimeout(() => {
+    // try {
+    //   const formData = new FormData();
+    //   formData.append("email", email);
+    //   const response = await axios.post(
+    //     "https://backendsec3.trainees-mad-s.com/api/user/password/forgot-password",
+    //     formData
+    //   );
+    //   console.log("send email to api successfully", response.data);
+     setShowSuccess(true);
+       setTimeout(() => {
         setShowSuccess(false);
         navigate("/verify-code", { state: { email } });
       }, 4000);
-    } catch (error) {
-      setInvailed(t("error-cannot-send-code"));
-    }
+    // } catch (error) {
+    //   setInvailed(t("error-cannot-send-code"));
+    // }
   };
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">
