@@ -256,7 +256,7 @@ const Login = ({ darkMode, setDarkMode }) => {
               to="/profile" // الانتقال إلى صفحة البروفايل
               className="text-green-600 font-semibold hover:underline text-xs"
             >
-              {t("continue-button")} {/* زر CONTINUE */}
+               {t("close-success-button")} {/* زر CONTINUE */}
             </Link>
           </div>
         </div>
