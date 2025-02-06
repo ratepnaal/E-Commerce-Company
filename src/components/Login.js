@@ -85,8 +85,8 @@ const Login = ({ darkMode, setDarkMode }) => {
     if (email && password) {
       setShowSuccess(true);
       setTimeout(() => {
-        setShowSuccess(false);
         navigate("/profile"); // الانتقال إلى صفحة البروفايل
+         setShowSuccess(false);
       }, 4000);
     } else {
       setInvailed(t("error-message-login-failed"));
