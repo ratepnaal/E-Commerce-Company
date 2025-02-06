@@ -84,10 +84,6 @@ const Login = ({ darkMode, setDarkMode }) => {
     // تسجيل الدخول الديناميكي باستخدام معلومات وهمية
     if (email && password) {
       setShowSuccess(true);
-      setTimeout(() => {
-        navigate("/profile"); // الانتقال إلى صفحة البروفايل
-         setShowSuccess(false);
-      }, 4000);
     } else {
       setInvailed(t("error-message-login-failed"));
       setShowModalError(true);
@@ -168,6 +164,7 @@ const Login = ({ darkMode, setDarkMode }) => {
               </div>
             )}
 
+     
             {/* Link & Button */}
             <div className="flex flex-col items-center justify-center mb-6">
               <div className="text-center">
@@ -255,12 +252,12 @@ const Login = ({ darkMode, setDarkMode }) => {
             </h2>
             <p className="text-gray-600 mb-2 text-xs">{t("message-of-success-login")}</p>
             <hr className="w-4/5 border-b-2 border-gray-400 mx-auto my-4" />
-            <button
-              onClick={() => setShowSuccess(false)}
+            <Link
+              to="/profile" // الانتقال إلى صفحة البروفايل
               className="text-green-600 font-semibold hover:underline text-xs"
             >
-              {t("close-success-button")}
-            </button>
+              {t("continue-button")} {/* زر CONTINUE */}
+            </Link>
           </div>
         </div>
       )}
