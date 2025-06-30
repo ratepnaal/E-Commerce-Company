@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState, useContext  , useEffect } from "react";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import Logo from '../images/logo.svg';
@@ -7,56 +7,60 @@ import { useNavigate  } from 'react-router-dom';
 import IconError from "../images/icons/ERROR.svg";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-const SetNewPassword = (darkMode , setDarkMode) => {
+import { ThemeContext } from "../contexts/ThemeContext";
+import { resetPassword } from "../apiService";
+
+const SetNewPassword = () => {
+  const { darkMode } = useContext(ThemeContext);
   const [showSuccess , setShowSuccess] = useState(false);
   const [Invailed, setInvailed] = useState("");
+   const [error, setError] = useState("");
+     const [isLoading, setIsLoading] = useState(false);
   const [password , setPassword] = useState("");
   const [confirmPassword , setConfirmPassword] = useState("");
   const {t} = useTranslation();
   const navigate = useNavigate();
-  const handleSubmit = async (e)=> {
-    const token = localStorage.getItem('authToken');
+
+  // التأكد من وجود التوكن المؤقت عند تحميل الصفحة
+  useEffect(() => {
+    const resetToken = localStorage.getItem('resetToken');
+    if (!resetToken) {
+      console.warn("No reset token found, redirecting to forgot password page.");
+      navigate('/change-password');
+    }
+  }, [navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
-    // تحقق من مطابقة كلمتي المرور
     if (password !== confirmPassword) {
-      setInvailed(t('error_message.passwords_mismatch'));
+      setError(t('error_message.passwords_mismatch'));
       return;
     }
 
-    // try {
-    //   // إعداد بيانات الطلب
-    //   const formData = new FormData();
-    //   formData.append('password', password);
-    //   formData.append('password_confirmation', confirmPassword);
+    setIsLoading(true);
+    setError("");
 
-    //   // إرسال الطلب إلى API لتحديث كلمة المرور
-    //   await axios.post(
-    //     'https://backendsec3.trainees-mad-s.com/api/user/password/reset-password',
-    //     formData,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`, 
-    //       },
-    //     }
-    //   );
-    //   localStorage.removeItem('authToken');
-    //   // عرض رسالة نجاح
+    try {
+      const passwordData = { password, password_confirmation: confirmPassword };
+      await resetPassword(passwordData);
+
+      // بعد النجاح، احذف التوكن المؤقت
+      localStorage.removeItem('resetToken');
+
       setShowSuccess(true);
-      setInvailed("");
-     
-      
-      // إعادة التوجيه إلى صفحة تسجيل الدخول بعد نجاح التحديث
       setTimeout(() => {
         setShowSuccess(false);
-        navigate('/');
+        navigate('/'); // توجيه المستخدم لصفحة تسجيل الدخول
       }, 3000);
 
-    // } catch (error) {
-    //   console.error('Password reset failed:', error);
-    //   setInvailed(t('error_message.reset_failed'));
-    // }
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || t('error_message.reset_failed');
+      setError(errorMessage);
+      console.error('Password reset failed:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">
@@ -155,6 +159,29 @@ const SetNewPassword = (darkMode , setDarkMode) => {
           </div>
         </div>
       )}
+       <button
+              type="submit"
+              className="w-28 h-8 border border-neutral-500 shadow-xl bg-green-500 flex items-center justify-center hover:bg-green-600 text-black font-semibold py-2 rounded-lg text-[11px]"
+              disabled={isLoading}
+            >
+              {isLoading ? t('loading...') : t("login")}
+            </button>
+
+            {/* Error Message Display */}
+            {error && (
+              <div className="flex items-center justify-center border border-red-400 text-red-700 w-full max-w-xs py-2 mt-2 rounded-md mb-4">
+                <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
+                <span className="text-sm">{error}</span>
+              </div>
+            )}
+ {Invailed && (
+              <div className="flex items-center justify-center border border-red-400 text-red-700 mx-28 py-2 mt-2 rounded-md mb-4">
+                <span>
+                  <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
+                </span>
+                <span className="text-sm">{Invailed}</span>
+              </div>
+            )}
     </div>
   );
 };

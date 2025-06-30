@@ -1,5 +1,6 @@
-import {React , useState , useEffect} from 'react'
-import { BrowserRouter as Router , Route , Routes, useNavigate } from "react-router-dom";
+import {React , useContext} from 'react'
+import { ThemeProvider, ThemeContext } from './contexts/ThemeContext';
+import { BrowserRouter as Router , Route , Routes } from "react-router-dom";
 import { I18nextProvider } from 'react-i18next';
 import Login from './components/Login'
 import ChangePassword from './components/ChangePassword';
@@ -13,62 +14,46 @@ import LanguageSelector from './components/LanguageSelector ';
 import VerifyResetCode from './components/VerifyResetCode';
 import SetNewPassword from './components/SetNewPassword';
 import { useTranslation } from 'react-i18next';
-import PrivateRoute from './PrivateRoute';
+import { LanguageProvider } from './contexts/LanguageContext';
 
-const App = () => {
-  const [darkMode , setDarkMode] = useState(false);
-  useEffect(()=>{
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark'){
-      setDarkMode(true)
-    }else{
-      setDarkMode(false);
-    }
-  } , [] );
-  useEffect(()=>{
-    if (darkMode){
-      document.documentElement.setAttribute('data-theme' , 'dark');
-      localStorage.setItem('theme' , 'dark');
-    }else{
-      document.documentElement.removeAttribute('data-theme')
-      localStorage.setItem('theme' , 'light')
-    }
-    }
-   , [darkMode])
-   const { i18n } = useTranslation();
-   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
- 
-   const changeLanguage = (lang) => {
-     i18n.changeLanguage(lang);
-     setCurrentLanguage(lang);
-   };
-   useEffect(() => {
-    document.body.dir = currentLanguage === "ar" ? "rtl" : "ltr";
-  }, [currentLanguage]);
-
+const AppContent = () => {
+  const { darkMode } = useContext(ThemeContext);
+  const { i18n } = useTranslation();
   return (
     <div className={`${darkMode?`bg-gray-900 text-white`:``}`}>
       <I18nextProvider i18n={i18n}>
-      <LanguageSelector currentLanguage={currentLanguage} changeLanguage={changeLanguage} darkMode={darkMode} />
-      <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
-      <Router>
-        <Routes>
-          <Route path='/' element = {<Login darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
-          <Route path='/change-password' element = {<ChangePassword darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
-          <Route path='/sign-up' element = {<SignUp darkMode = {darkMode} setDarkMode={setDarkMode}/>}/>
-          <Route path='/verification' element = {<Verification darkMode = {darkMode} setDarkMode = {setDarkMode}/>}/>
-          <Route path="/profile" element={<Profile darkMode={darkMode} setDarkMode={setDarkMode} />} />
-          <Route path="/landing" element={<LandingPage darkMode={darkMode} setDarkMode={setDarkMode} />} />
-          <Route path="/floors" element={<Floors darkMode={darkMode} setDarkMode={setDarkMode} />  } />
-          <Route path='/verify-code' element = {<VerifyResetCode darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
-          <Route path='/set-password' element = {<SetNewPassword darkMode={darkMode} setDarkMode={setDarkMode}/>}/>
-        </Routes>
-      </Router>
+        <Router>
+          <LanguageSelector />
+          <DarkModeToggle />
+          <Routes>
+            <Route path='/' element={<Login/>}/>
+            <Route path='/change-password' element={<ChangePassword/>}/>
+            <Route path='/sign-up' element={<SignUp/>}/>
+            <Route path='/verification' element={<Verification/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/landing" element={<LandingPage/>}/>
+            <Route path="/floors" element={<Floors/>}/>
+            <Route path='/verify-code' element={<VerifyResetCode/>}/>
+            <Route path='/set-password' element={<SetNewPassword/>}/>
+          </Routes>
+        </Router>
       </I18nextProvider>
     </div>
-  )
-}
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
+  );
+};
+
 export default App
+
 
 
 

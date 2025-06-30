@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../images/logo.svg";
 import Photo1 from "../images/ImageLogin-1.png";
@@ -12,37 +12,30 @@ import IconPassword from "../images/icons/carbon_password.svg";
 import IconError from "../images/icons/ERROR.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import addNotification from "react-push-notification";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import api from "../api";
-const Login = ({ darkMode, setDarkMode }) => {
-  const username = localStorage.getItem('username') || '';
+import { ThemeContext } from "../contexts/ThemeContext";
+import { signUp } from "../apiService";
+
+const Login = () => {
   const navigate = useNavigate();
+  const { darkMode } = useContext(ThemeContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [username, setUserName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [photo, setPhoto] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
   const Images = [Photo1, Photo2, Photo3, Photo4, Photo5, Photo6];
   const [showModalError, setShowModalError] = useState(false);
   const [Invailed, setInvailed] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  //    Notification.requestPermission().then(permission => {
-  //     if (permission === "granted") {
-  //       addNotification({
-  //         title: 'Welcome Back 🎉',
-  //         message: `Hello ${username} ! `,
-  //         duration: 4000,
-  //         native: true,
-  //         icon: Logo,
-  //         onClick: () => console.log("Push Notification!")
-  //       });
-  //     } else {
-  //       console.log("Notification permission denied");
-  //     }
-  //   });
-  // };
+  const [error, setError] = useState(""); 
 
   // تغيير الصور كل 10 دقائق
   useEffect(() => {
@@ -54,42 +47,48 @@ const Login = ({ darkMode, setDarkMode }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError(t("message-error-mismatch"));
+      return;
+    }
+
     setIsLoading(true);
-
-    // تعطيل طلب API ووضعه في تعليق
-    /*
+    setError("");     
     try {
-      const credentials = { email, password };
-      const response = await api.post('/login', credentials);
-      console.log("تم تسجيل الدخول بنجاح", response);
+      // 3. تجهيز الـ FormData لإرسالها للـ API
+      const formData = new FormData();
+      formData.append("full_name", fullName);
+      formData.append("username", username);
+      formData.append("phone", phone);
+      formData.append("address", `${country}, ${city}`);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("password_confirmation", confirmPassword);
+      if (photo) {
+        formData.append("photo", photo);
+      }
 
-      const { accessToken, refreshToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('email', email);
+      // 4. استدعاء دالة signUp من apiService
+      const response = await signUp(formData);
 
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
-        navigate("/profile");
+        navigate('/verification', { state: { email } });
       }, 4000);
-    } catch (error) {
-      setInvailed(t("error-message-login-failed"));
-      setShowModalError(true);
+
+    } catch (err) {
+      // 6. في حال الفشل، قم بمعالجة الخطأ
+      const errorMessage = err.response?.data?.message || t("error-message-signup-failed");
+      setError(errorMessage);
+      console.error("Sign Up Failed:", err);
     } finally {
+      // 7. في كل الحالات، قم بإيقاف حالة التحميل
       setIsLoading(false);
     }
-    */
-
-    // تسجيل الدخول الديناميكي باستخدام معلومات وهمية
-    if (email && password) {
-      setShowSuccess(true);
-    } else {
-      setInvailed(t("error-message-login-failed"));
-      setShowModalError(true);
-    }
-    setIsLoading(false);
   };
+  
 
   const { t } = useTranslation();
 

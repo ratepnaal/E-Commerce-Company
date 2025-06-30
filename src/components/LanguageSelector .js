@@ -1,8 +1,11 @@
+import React, { useState, useContext } from 'react';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { LanguageContext } from '../contexts/LanguageContext'; 
 
-import React, { useState } from 'react';
-
-const LanguageSelector = ({ currentLanguage, changeLanguage , darkMode }) => {
+const LanguageSelector = () => {
+   const { currentLanguage, changeLanguage } = useContext(LanguageContext);
   const [isOpen, setIsOpen] = useState(false);
+  const { darkMode } = useContext(ThemeContext);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
