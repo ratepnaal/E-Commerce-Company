@@ -1,5 +1,4 @@
 import React, { useState, useContext  , useEffect } from "react";
-import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import Logo from '../images/logo.svg';
 import BackgroundImage from '../images/ImageLogin-6.png'; 
@@ -9,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from "../contexts/ThemeContext";
 import { resetPassword } from "../apiService";
+import { useAuth } from '../contexts/AuthContext';
 
 const SetNewPassword = () => {
   const { darkMode } = useContext(ThemeContext);

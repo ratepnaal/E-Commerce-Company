@@ -118,7 +118,8 @@
 "sinks": "FREGADEROS",
 "faucets": "GRIFOS",
 "kitchens": "COCINAS",
-"Business-exhibition": "EXPOSICIÓN EMPRESARIAL"
+"Business-exhibition": "EXPOSICIÓN EMPRESARIAL",
+"error_message.invalid_code_length": "El código de verificación debe tener 6 dígitos."
 
 
 }

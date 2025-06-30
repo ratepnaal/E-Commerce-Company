@@ -140,7 +140,8 @@
    "login-new-password":"NOW YOU CAN LOGIN WITH THE NEW PASSWORD",
    "title-of-succsess-changed":"YOUR PASSWORD UPDATED",
    "error_message.reset_failed":"PASSWORD WEAK !",
-   "error_message.passwords_mismatch":"PASSWORDS DON'T MISMATCH ! "
+   "error_message.passwords_mismatch":"PASSWORDS DON'T MISMATCH ! ",
+   "error_message.invalid_code_length": "Verification code must be 6 digits."
   
 }
 

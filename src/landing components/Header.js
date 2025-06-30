@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Logo from '../images/logo.svg';
 import { Link } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = ({ darkMode, setDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { t } = useTranslation();
+   const navigate = useNavigate();
+   const { isAuthenticated, logout } = useAuth();
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,6 +18,11 @@ const Header = ({ darkMode, setDarkMode }) => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+    const handleLogout = () => {
+    logout();
+    navigate('/'); // توجيه المستخدم لصفحة تسجيل الدخول بعد الخروج
+    toggleDropdown(); // إغلاق القائمة المنسدلة
   };
 
   return (
@@ -43,6 +52,25 @@ const Header = ({ darkMode, setDarkMode }) => {
             <li><a href="#pools" className="hover:bg-teal-700 p-2 rounded-lg"  onClick={toggleDropdown}>{t('pools')}</a></li>
             <li><a href="#railing" className="hover:bg-teal-700 p-2 rounded-lg"  onClick={toggleDropdown}>{t('railings')}</a></li>
             <li><a href="#contact" className="hover:bg-teal-700 p-2 rounded-lg"  onClick={toggleDropdown}>{t('contact')}</a></li>
+             {/* -- الجزء الديناميكي -- */}
+            {isAuthenticated ? (
+              <>
+                <hr className={darkMode ? 'border-gray-500' : 'border-gray-300'} />
+                <li><Link to="/profile" className="block hover:bg-teal-700 hover:text-white p-2 rounded-lg" onClick={toggleDropdown}>{t('profile')}</Link></li>
+                <li>
+                  <button onClick={handleLogout} className="w-full text-left flex items-center hover:bg-red-500 hover:text-white p-2 rounded-lg">
+                    <img alt="Logout" className="h-4 w-4 mr-2" />
+                    {t('logout')}
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <hr className={darkMode ? 'border-gray-500' : 'border-gray-300'} />
+                <li><Link to="/" className="block hover:bg-teal-700 hover:text-white p-2 rounded-lg" onClick={toggleDropdown}>{t('login')}</Link></li>
+              </>
+            )}
+            {/* -- نهاية الجزء الديناميكي -- */}
           </ul>
         </div>
       )}
@@ -77,6 +105,25 @@ const Header = ({ darkMode, setDarkMode }) => {
             <li><a href="#railing" className="hover:bg-teal-700 p-2 rounded-lg"  onClick={toggleDropdown}>{t('railings')}</a></li>
             <li><Link to="/profile" className="hover:bg-teal-700 p-2 rounded-lg"  onClick={toggleDropdown}>{t('profile')}</Link></li>
             <li><a href="#contact" className="hover:bg-teal-700 p-2 rounded-lg"  onClick={toggleDropdown}>{t('contact')}</a></li>
+               {/* -- الجزء الديناميكي -- */}
+            {isAuthenticated ? (
+              <>
+                <hr className={darkMode ? 'border-gray-500' : 'border-gray-300'} />
+                <li><Link to="/profile" className="block hover:bg-teal-700 hover:text-white p-2 rounded-lg" onClick={toggleDropdown}>{t('profile')}</Link></li>
+                <li>
+                  <button onClick={handleLogout} className="w-full text-left flex items-center hover:bg-red-500 hover:text-white p-2 rounded-lg">
+                    <img alt="Logout" className="h-4 w-4 mr-2" />
+                    {t('logout')}
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <hr className={darkMode ? 'border-gray-500' : 'border-gray-300'} />
+                <li><Link to="/" className="block hover:bg-teal-700 hover:text-white p-2 rounded-lg" onClick={toggleDropdown}>{t('login')}</Link></li>
+              </>
+            )}
+            {/* -- نهاية الجزء الديناميكي -- */}
           </ul>
         </div>
       )}

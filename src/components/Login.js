@@ -15,27 +15,24 @@ import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from "../contexts/ThemeContext";
-import { signUp } from "../apiService";
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
+   const { darkMode } = useContext(ThemeContext);
+  const { login } = useAuth(); // <-- 2. استخدام الـ Hook للحصول على دالة login فقط
   const navigate = useNavigate();
-  const { darkMode } = useContext(ThemeContext);
+  const { t } = useTranslation();
+  const { mockLogin } = useAuth();
+
+  // States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [username, setUserName] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-  const [photo, setPhoto] = useState(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // State للصور المتحركة
   const [currentImage, setCurrentImage] = useState(0);
   const Images = [Photo1, Photo2, Photo3, Photo4, Photo5, Photo6];
-  const [showModalError, setShowModalError] = useState(false);
-  const [Invailed, setInvailed] = useState("");
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(""); 
 
   // تغيير الصور كل 10 دقائق
   useEffect(() => {
@@ -46,51 +43,28 @@ const Login = () => {
   }, [Images]);
 
   const handleSubmit = async (e) => {
+    // e.preventDefault();
+    // setIsLoading(true);
+    // setError("");
+
+    // // 3. استدعاء دالة login من الـ Context مباشرة
+    // const result = await login(email, password);
+
+    // // 4. التحقق من النتيجة اللي رجعت من الـ Context
+    // if (result.success) {
+    //   // الـ Context هو اللي اهتم بتخزين التوكن وتحديث الحالة
+    //   // هون بس منوجه المستخدم للصفحة التالية
+    //   navigate("/landing");
+    // } else {
+    //   // إذا فشل، الـ Context بيرجع رسالة الخطأ
+    //   setError(result.error);
+    // }
+
+    // setIsLoading(false);
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setError(t("message-error-mismatch"));
-      return;
-    }
-
-    setIsLoading(true);
-    setError("");     
-    try {
-      // 3. تجهيز الـ FormData لإرسالها للـ API
-      const formData = new FormData();
-      formData.append("full_name", fullName);
-      formData.append("username", username);
-      formData.append("phone", phone);
-      formData.append("address", `${country}, ${city}`);
-      formData.append("email", email);
-      formData.append("password", password);
-      formData.append("password_confirmation", confirmPassword);
-      if (photo) {
-        formData.append("photo", photo);
-      }
-
-      // 4. استدعاء دالة signUp من apiService
-      const response = await signUp(formData);
-
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-        navigate('/verification', { state: { email } });
-      }, 4000);
-
-    } catch (err) {
-      // 6. في حال الفشل، قم بمعالجة الخطأ
-      const errorMessage = err.response?.data?.message || t("error-message-signup-failed");
-      setError(errorMessage);
-      console.error("Sign Up Failed:", err);
-    } finally {
-      // 7. في كل الحالات، قم بإيقاف حالة التحميل
-      setIsLoading(false);
-    }
+    mockLogin();
+    navigate("/landing");
   };
-  
-
-  const { t } = useTranslation();
 
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">
@@ -152,17 +126,6 @@ const Login = () => {
                 <img src={IconPassword} alt="Password Icon" className="h-4 w-5" />
               </span>
             </div>
-
-            {/* Error message */}
-            {Invailed && (
-              <div className="flex items-center justify-center border border-red-400 text-red-700 mx-28 py-2 mt-2 rounded-md mb-4">
-                <span>
-                  <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
-                </span>
-                <span className="text-sm">{Invailed}</span>
-              </div>
-            )}
-
      
             {/* Link & Button */}
             <div className="flex flex-col items-center justify-center mb-6">
@@ -191,8 +154,15 @@ const Login = () => {
               className="w-28 h-8 border border-neutral-500 shadow-xl bg-green-500 flex items-center justify-center hover:bg-green-600 text-black font-semibold py-2 rounded-lg text-[11px]"
               disabled={isLoading}
             >
-              {isLoading ? "جاري التحميل..." : t("login")}
+              {isLoading ?"..... Loading " : t("login")}
             </button>
+             {/* Error Message Display */}
+            {error && (
+              <div className="flex items-center justify-center border border-red-400 text-red-700 w-full max-w-xs py-2 mt-2 rounded-md mb-4">
+                <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
+                <span className="text-sm">{error}</span>
+              </div>
+            )}
           </form>
         </div>
 
@@ -205,61 +175,11 @@ const Login = () => {
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
+             
           ></div>
+          
         </div>
       </div>
-
-      {/* Error window */}
-      {showModalError && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div
-            className="bg-white p-4 rounded-2xl shadow-lg text-center fade-in"
-            style={{
-              width: "300px",
-              animation: "fadeIn 0.5s",
-              borderRadius: "20px",
-            }}
-          >
-            <h2 className="text-lg font-semibold text-black mb-4">
-              {t("title")}
-            </h2>
-            <p className="text-gray-600 mb-2 text-xs">{t("message")}</p>
-            <hr className="w-4/5 border-b-2 border-gray-400 mx-auto my-4" />
-            <button
-              onClick={() => setShowModalError(false)}
-              className="text-red-500 font-semibold hover:underline text-xs"
-            >
-              {t("dismiss_button")}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Success window */}
-      {showSuccess && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div
-            className="bg-white p-4 rounded-2xl shadow-lg text-center fade-in"
-            style={{
-              width: "300px",
-              animation: "fadeIn 0.5s",
-              borderRadius: "20px",
-            }}
-          >
-            <h2 className="text-lg font-semibold text-black mb-4">
-              {t("title-of-succsess-login")}
-            </h2>
-            <p className="text-gray-600 mb-2 text-xs">{t("message-of-success-login")}</p>
-            <hr className="w-4/5 border-b-2 border-gray-400 mx-auto my-4" />
-            <Link
-              to="/profile" // الانتقال إلى صفحة البروفايل
-              className="text-green-600 font-semibold hover:underline text-xs"
-            >
-               {t("close-success-button")} {/* زر CONTINUE */}
-            </Link>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

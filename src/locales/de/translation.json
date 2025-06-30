@@ -118,7 +118,8 @@
 "sinks": "SPÜLEN",
 "faucets": "WASSERHÄHNE",
 "kitchens": "KÜCHEN",
-"Business-exhibition": "GESCHÄFTSAUSSTELLUNG"
+"Business-exhibition": "GESCHÄFTSAUSSTELLUNG",
+"error_message.invalid_code_length": "Der Bestätigungscode muss 6-stellig sein."
 
 
 }

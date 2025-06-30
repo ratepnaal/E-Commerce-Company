@@ -118,7 +118,8 @@
 "sinks": "ÉVIERS",
 "faucets": "ROBINETS",
 "kitchens": "CUISINES",
-"Business-exhibition": "EXPOSITION COMMERCIALE"
+"Business-exhibition": "EXPOSITION COMMERCIALE",
+"error_message.invalid_code_length": "Le code de vérification doit contenir 6 chiffres."
 
 
 }

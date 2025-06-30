@@ -15,6 +15,8 @@ import VerifyResetCode from './components/VerifyResetCode';
 import SetNewPassword from './components/SetNewPassword';
 import { useTranslation } from 'react-i18next';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './PrivateRoute'; 
 
 const AppContent = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -30,9 +32,9 @@ const AppContent = () => {
             <Route path='/change-password' element={<ChangePassword/>}/>
             <Route path='/sign-up' element={<SignUp/>}/>
             <Route path='/verification' element={<Verification/>}/>
-            <Route path="/profile" element={<Profile/>}/>
-            <Route path="/landing" element={<LandingPage/>}/>
-            <Route path="/floors" element={<Floors/>}/>
+            <Route path="/profile" element={ <PrivateRoute> <Profile/> </PrivateRoute>}/>
+            <Route path="/landing" element={<PrivateRoute> <LandingPage/> </PrivateRoute>}/>
+            <Route path="/floors" element={<PrivateRoute> <Floors/> </PrivateRoute>}/>
             <Route path='/verify-code' element={<VerifyResetCode/>}/>
             <Route path='/set-password' element={<SetNewPassword/>}/>
           </Routes>
@@ -44,11 +46,13 @@ const AppContent = () => {
 
 const App = () => {
   return (
+    <AuthProvider>
     <ThemeProvider>
       <LanguageProvider>
         <AppContent />
       </LanguageProvider>
     </ThemeProvider>
+    </AuthProvider>
   );
 };
 

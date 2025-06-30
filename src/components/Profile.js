@@ -11,22 +11,20 @@ import DarkModeToggle from "./DarkModeToggle";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { useAuth } from "../contexts/AuthContext";
 
 const Profile = () => {
   const { darkMode } = useContext(ThemeContext);
-  const email = localStorage.getItem('email') || "example@example.com";
-  const full_name = localStorage.getItem('username') || "اسم المستخدم";
-  const number = localStorage.getItem('number') || "123456789";
-  const address = localStorage.getItem('address') || "عنوان المستخدم";
-  const photo = localStorage.getItem('photo') || profileImage;
-
+  const { user, logout } = useAuth(); // <-- الحصول على المستخدم ودالة الخروج من AuthContext
+  
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userData");
-    navigate("/");
+    logout(); // <-- 3. استدعاء دالة logout من الـ Context
+    navigate("/"); // توجيه المستخدم لصفحة تسجيل الدخول بعد الخروج
   };
 
   const handleLogoutClick = () => {
@@ -37,7 +35,15 @@ const Profile = () => {
     setShowLogoutConfirm(false);
   };
 
-  const { t } = useTranslation();
+  // في حال لم يتم تحميل بيانات المستخدم بعد، أو المستخدم غير مسجل دخوله
+  // (مع أن PrivateRoute يفترض أن يمنع هذا)
+  if (!user) {
+    return <div>Loading user profile...</div>; // أو أي مؤشر تحميل آخر
+  }
+
+  // 4. استخدام بيانات المستخدم من الـ user object مباشرة
+  const { full_name, email, address, photo , number } = user;
+
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-white'}`}>

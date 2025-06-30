@@ -18,6 +18,7 @@ const VerifyResetCode = () => {
    const [isLoading, setIsLoading] = useState(false);
      const [error, setError] = useState('');
       const [signed, setSigned] = useState(false);
+      const [email , setEmail] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
 

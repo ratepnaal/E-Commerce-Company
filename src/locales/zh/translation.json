@@ -118,7 +118,8 @@
 "sinks": "水槽",
 "faucets": "水龙头",
 "kitchens": "厨房",
-"Business-exhibition": "商业展览"
+"Business-exhibition": "商业展览",
+"error_message.invalid_code_length": "验证码必须为6位数。"
 
 
 }
