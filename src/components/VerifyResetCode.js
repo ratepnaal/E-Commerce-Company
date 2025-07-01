@@ -8,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from "../contexts/ThemeContext";
 import { verifyPasswordResetCode } from "../apiService";
+import { toast } from 'react-toastify';
 
 const VerifyResetCode = () => {
    const [code, setCode] = useState(new Array(6).fill(''));
@@ -22,38 +23,31 @@ const VerifyResetCode = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-   const handleVerification = async () => {
-        setIsLoading(true);
-        setError('');
-
-        const verificationCode = code.join('');
-        if (verificationCode.length !== 6) {
-            setError(t("error_message.invalid_code_length")); // أضف هذه الترجمة لملفات اللغة
-            setIsLoading(false);
-            return;
-        }
-
-        try {
-            const response = await verifyPasswordResetCode({ email, code: verificationCode });
-            
-            // في حال النجاح، الـ API يفترض أن يرجع توكن مؤقت لاستخدامه في الخطوة التالية
-            const resetToken = response.data.token; // افترض أن التوكن يرجع بهذا الشكل
-            localStorage.setItem('resetToken', resetToken); // تخزين التوكن
-            
-            setSigned(true); // إظهار رسالة النجاح
-            setTimeout(() => {
-                setSigned(false);
-                navigate('/set-password'); // توجيه المستخدم لصفحة تعيين كلمة المرور الجديدة
-            }, 3000);
-
-        } catch (err) {
-            const errorMessage = err.response?.data?.message || t("error_message.verification_failed");
-            setError(errorMessage);
-            console.error("Code verification failed:", err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+   const handleVerification = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const verificationCode = code.join('');
+    if (verificationCode.length !== 6) {
+      toast.error(t("error_message.invalid_code_length"));
+      setIsLoading(false);
+      return;
+    }
+    try {
+      const response = await verifyPasswordResetCode({ email, code: verificationCode });
+      const resetToken = response.data.token;
+      localStorage.setItem('resetToken', resetToken);
+      toast.success(t("reset_code_success_message"));
+      setTimeout(() => {
+        navigate('/set-password');
+      }, 2000);
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || t("error_message.verification_failed");
+      toast.error(errorMessage);
+      console.error("Code verification failed:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col flex-grow">

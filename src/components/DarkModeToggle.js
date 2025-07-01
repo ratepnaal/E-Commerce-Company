@@ -5,19 +5,19 @@ import { ThemeContext } from '../contexts/ThemeContext';
 const DarkModeToggle = () => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   return (
-    <div
-    className={`fixed top-4 right-9 p-2 rounded-full shadow-lg mt-[500px] 
-    ${darkMode ? 'bg-gray-800 text-yellow-400' : 'bg-white text-gray-900'}
-    transition-colors duration-300 ease-in-out cursor-pointer`}
-    onClick={toggleDarkMode}
-    aria-label="Toggle Dark Mode"
-  >
+    <button
+      className={`fixed bottom-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full shadow-lg border-2 transition-all duration-300 cursor-pointer
+        ${darkMode ? 'bg-gray-800 border-yellow-400 text-yellow-300' : 'bg-white border-yellow-500 text-yellow-600'}
+        hover:scale-110 hover:shadow-2xl`}
+      onClick={toggleDarkMode}
+      aria-label="Toggle Dark Mode"
+    >
       {darkMode ? (
-        <FaMoon size={24}/>
+        <FaMoon size={26} className="transition-transform duration-300 rotate-12" />
       ) : (
-        <FaSun size={24} />
+        <FaSun size={26} className="transition-transform duration-300 rotate-0" />
       )}
-    </div>
+    </button>
   );
 };
 

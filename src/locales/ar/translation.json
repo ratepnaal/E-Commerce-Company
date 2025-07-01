@@ -141,9 +141,14 @@
 "message-of-success-changed":"تم تحديث كلمة المرور الخاصة بحسابك ",
 "error_message.reset_failed":"عذرا كلمة المرور ضعيفة !",
 "error_message.passwords_mismatch":"عذرا كلمات المرور غير متطابقة ",
-"error_message.invalid_code_length": "يجب أن يتألف رمز التحقق من 6 أرقام."
-
-  
+"error_message.invalid_code_length": "يجب أن يتألف رمز التحقق من 6 أرقام.",
+"signup_title": "تسجيل حساب جديد",
+"passwords-dont-match": "كلمتا المرور غير متطابقتين!",
+"confirm_password_label": "تأكيد كلمة المرور",
+"forgot_password_label": "هل نسيت كلمة المرور؟",
+"dont-have-account-label": "ليس لديك حساب؟",
+"dont-have-account": "أنشئ حساب جديد",
+"forgot_password": "نسيت كلمة المرور"
 }
 
 

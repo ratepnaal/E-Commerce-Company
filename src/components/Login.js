@@ -16,18 +16,18 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useAuth } from "../contexts/AuthContext";
+import { toast } from 'react-toastify';
 
 const Login = () => {
-   const { darkMode } = useContext(ThemeContext);
+   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { login } = useAuth(); // <-- 2. استخدام الـ Hook للحصول على دالة login فقط
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { mockLogin } = useAuth();
 
   // States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
   // State للصور المتحركة
@@ -54,130 +54,129 @@ const Login = () => {
     // if (result.success) {
     //   // الـ Context هو اللي اهتم بتخزين التوكن وتحديث الحالة
     //   // هون بس منوجه المستخدم للصفحة التالية
+
+    //   toast.success(t('title-of-succsess-login'));
     //   navigate("/landing");
     // } else {
     //   // إذا فشل، الـ Context بيرجع رسالة الخطأ
+    //   toast.error(result.error || t('error-message-login-failed'));
     //   setError(result.error);
     // }
 
     // setIsLoading(false);
     e.preventDefault();
-    mockLogin();
-    navigate("/landing");
+    try {
+      mockLogin();
+      toast.success(t('title-of-succsess-login'));
+      navigate("/landing");
+    } catch (err) {
+      toast.error(t('error-message-login-failed'));
+    }
+  };
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col flex-grow">
-      {/* Header */}
-      <header className="w-full h-[50px] bg-[#1c5268]"></header>
+    <div className={`min-h-screen w-full flex flex-col flex-grow ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <header className={`w-full h-[50px] ${darkMode ? 'bg-gray-800' : 'bg-[#1c5268]'}`}></header>
       <div className="flex flex-grow">
-        {/* Left Section */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8">
-          <h1 className="text-6xl font-bold text-center mb-2">
-            {t("welcome_title")}
-          </h1>
-          <p className="text-3xl font-semibold text-center mb-8">
-            {t("subtitle")}
-          </p>
-          <LazyLoadImage src={Logo} alt="Logo" className="h-16 mb-8" />
-          <form
-            onSubmit={handleSubmit}
-            autoComplete="on"
-            className="w-3/4 flex flex-col items-center justify-center"
-          >
-            {/* Email */}
-            <div className="relative mb-6">
-              <label className="text-[10px] block mb-2">
-                {t("email_label")}
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="EXAMPLE@GMAIL.COM"
-                className={`h-6 pl-12 py-3 text-[10px] bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${
-                  darkMode ? `text-black` : ``
-                }`}
-                required
-                autoComplete="email"
-              />
-              <span className="absolute top-7 left-3 flex items-center">
-                <img src={IconeEmail} alt="Email Icon" className="h-4 w-5" />
-              </span>
-            </div>
-
-            {/* Password */}
-            <div className="relative mb-6">
-              <label className="text-[10px] block mb-2">
-                {t("password_label")}
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="**********"
-                className={`h-6 pl-12 py-3 text-[10px] bg-gray-200 border border-neutral-500 shadow-xl rounded-md ${
-                  darkMode ? `text-black` : ``
-                }`}
-                required
-                autoComplete="current-password"
-              />
-              <span className="absolute top-7 left-3 flex items-center">
-                <img src={IconPassword} alt="Password Icon" className="h-4 w-5" />
-              </span>
-            </div>
-     
-            {/* Link & Button */}
-            <div className="flex flex-col items-center justify-center mb-6">
-              <div className="text-center">
-                <h4 className="text-[11px] inline">{t("dont-have")}</h4>
-                <Link
-                  to={"/sign-up"}
-                  className="text-[11px] text-blue-500 hover:underline ml-2"
-                >
-                  {t("signup-label")}
-                </Link>
-              </div>
-              <div className="text-center mt-2">
-                <h4 className="text-[11px] inline">{t("forget")}</h4>
-                <Link
-                  to={"/change-password"}
-                  className="text-[11px] text-blue-500 hover:underline ml-2"
-                >
-                  {t("change")}
-                </Link>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="w-28 h-8 border border-neutral-500 shadow-xl bg-green-500 flex items-center justify-center hover:bg-green-600 text-black font-semibold py-2 rounded-lg text-[11px]"
-              disabled={isLoading}
+        {/* Left: Card */}
+        <div className="w-full lg:w-6/12 flex flex-col justify-center items-end p-1 lg:pr-20">
+          <div className={`w-full max-w-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-xl p-6 flex flex-col items-center`}>
+            <LazyLoadImage src={Logo} alt="Logo" className="h-20 mb-6" />
+            <h1 className={`text-3xl font-bold text-center mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>{t("welcome_title")}</h1>
+            <p className={`text-lg font-semibold text-center mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{t("subtitle")}</p>
+            <form
+              onSubmit={handleSubmit}
+              autoComplete="on"
+              className="w-full flex flex-col gap-6"
             >
-              {isLoading ?"..... Loading " : t("login")}
-            </button>
-             {/* Error Message Display */}
-            {error && (
-              <div className="flex items-center justify-center border border-red-400 text-red-700 w-full max-w-xs py-2 mt-2 rounded-md mb-4">
-                <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
-                <span className="text-sm">{error}</span>
+              {/* Email */}
+              <div className="flex flex-col gap-2 w-full">
+                <label className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{t("email_label")}</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2">
+                    <img src={IconeEmail} alt="email" className="h-5 w-5 opacity-70" />
+                  </span>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="EXAMPLE@GMAIL.COM"
+                    className={`h-11 pl-10 pr-4 text-sm ${darkMode ? 'bg-gray-900 text-white border-gray-700' : 'bg-gray-100 text-black border-gray-300'} border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition w-full`}
+                    required
+                    autoComplete="email"
+                  />
+                </div>
               </div>
-            )}
-          </form>
+              {/* Password */}
+              <div className="flex flex-col gap-2 w-full">
+                <label className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{t("password_label")}</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2">
+                    <img src={IconPassword} alt="password" className="h-5 w-5 opacity-70" />
+                  </span>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="**********"
+                    className={`h-11 pl-10 pr-4 text-sm ${darkMode ? 'bg-gray-900 text-white border-gray-700' : 'bg-gray-100 text-black border-gray-300'} border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition w-full`}
+                    required
+                    autoComplete="current-password"
+                  />
+                </div>
+              </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className={`h-11 w-full mt-4 ${darkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-500 hover:bg-green-600'} text-white font-semibold rounded-lg shadow transition text-lg flex items-center justify-center disabled:opacity-60 border ${darkMode ? 'border-green-900' : 'border-green-500'}`}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                ) : (
+                  t('login')
+                )}
+              </button>
+              {/* Helper Links */}
+              <div className="mt-4 w-full flex flex-col gap-2">
+                {/* Forgot Password Label & Link inline */}
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <label className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{t("forgot_password_label")}</label>
+                  <Link
+                    to="/change-password"
+                    className={`text-sm font-semibold ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-500 hover:text-blue-700'}`}
+                  >
+                    {t("forgot_password")}
+                  </Link>
+                </div>
+                {/* Don't Have Account Label & Link inline */}
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <label className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{t("dont-have-account-label")}</label>
+                  <Link
+                    to="/sign-up"
+                    className={`text-sm font-semibold underline-offset-2 ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-500 hover:text-blue-700'}`}
+                  >
+                    {t("signup-label")}
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-
-        {/* Right Section */}
-        <div className="hidden lg:block lg:w-1/2 h-full pl-20">
+        {/* Right: Animated Images */}
+        <div className="hidden lg:flex lg:w-6/12 h-full justify-start pr-4 pt-1">
           <div
-            className="w-full h-full bg-cover bg-center transition-all duration-1000"
+            className="w-full h-[600px] max-w-xl rounded-2xl shadow-xl bg-cover bg-center transition-all duration-1000"
             style={{
               backgroundImage: `url(${Images[currentImage]})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
-             
           ></div>
-          
         </div>
       </div>
     </div>

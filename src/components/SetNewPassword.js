@@ -9,6 +9,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from "../contexts/ThemeContext";
 import { resetPassword } from "../apiService";
 import { useAuth } from '../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const SetNewPassword = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -34,6 +35,7 @@ const SetNewPassword = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
+      toast.error(t('error_message.passwords_mismatch'));
       setError(t('error_message.passwords_mismatch'));
       return;
     }
@@ -48,6 +50,7 @@ const SetNewPassword = () => {
       // بعد النجاح، احذف التوكن المؤقت
       localStorage.removeItem('resetToken');
 
+      toast.success(t("title-of-succsess-changed"));
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
@@ -56,6 +59,7 @@ const SetNewPassword = () => {
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || t('error_message.reset_failed');
+      toast.error(errorMessage);
       setError(errorMessage);
       console.error('Password reset failed:', err);
     } finally {
@@ -118,70 +122,9 @@ const SetNewPassword = () => {
             >
               {t("login")}
             </button>
-             {/* Error messsage */}
-        {Invailed && (
-              <div
-                className="flex items-center justify-center 
-               border border-red-400 text-red-700 mx-28 py-2 mt-2 rounded-md mb-4"
-              >
-                <span>
-                  <img src={IconError} className="h-5 w-5 mr-2"></img>
-                </span>
-                <span className="text-sm">{Invailed}</span>
-              </div>
-            )}
-            </form>
+          </form>
         </div>
       </div>
-              {/**Success window*/}
-       {showSuccess && (
-        <div className={`fixed inset-0 flex items-center justify-center   ${darkMode?`bg-gray-800 text-white`:`bg-black bg-opacity-50`}`}>
-          <div
-            className={` p-4 rounded-2xl shadow-lg text-center fade-in ${darkMode?`bg-gray-800 text-white`:`bg-white`}`}
-            style={{
-              width: "300px",
-              animation: "fadeIn 0.5s",
-              borderRadius: "20px",
-            }}
-          >
-            <h2 className={`text-lg font-semibold mb-4 ${darkMode?`text-white`:`text-black`}`}>
-              {t("title-of-succsess-changed")}
-            </h2>
-            <p className={`text-gray-600 mb-2 text-xs ${darkMode?`text-white`:`text-gray-600`}`}>{t("login-new-password")}</p>
-            <hr className="w-4/5 border-b-2  border-gray-400 mx-auto my-4" />
-
-            <button
-              onClick={() => setShowSuccess(false)}
-              className="text-green-600 font-semibold hover:underline text-xs"
-            >
-              {t("close-success-button")};
-            </button>
-          </div>
-        </div>
-      )}
-       <button
-              type="submit"
-              className="w-28 h-8 border border-neutral-500 shadow-xl bg-green-500 flex items-center justify-center hover:bg-green-600 text-black font-semibold py-2 rounded-lg text-[11px]"
-              disabled={isLoading}
-            >
-              {isLoading ? t('loading...') : t("login")}
-            </button>
-
-            {/* Error Message Display */}
-            {error && (
-              <div className="flex items-center justify-center border border-red-400 text-red-700 w-full max-w-xs py-2 mt-2 rounded-md mb-4">
-                <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
-                <span className="text-sm">{error}</span>
-              </div>
-            )}
- {Invailed && (
-              <div className="flex items-center justify-center border border-red-400 text-red-700 mx-28 py-2 mt-2 rounded-md mb-4">
-                <span>
-                  <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
-                </span>
-                <span className="text-sm">{Invailed}</span>
-              </div>
-            )}
     </div>
   );
 };

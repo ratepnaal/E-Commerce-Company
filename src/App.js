@@ -17,6 +17,8 @@ import { useTranslation } from 'react-i18next';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './PrivateRoute'; 
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppContent = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -24,7 +26,21 @@ const AppContent = () => {
   return (
     <div className={`${darkMode?`bg-gray-900 text-white`:``}`}>
       <I18nextProvider i18n={i18n}>
+      
         <Router>
+                {/* -- ToastContainer لإظهار الرسائل -- */}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme={darkMode ? 'dark' : 'light'}
+        />
+
           <LanguageSelector />
           <DarkModeToggle />
           <Routes>

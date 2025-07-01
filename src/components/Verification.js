@@ -10,14 +10,13 @@ import IconError from "../images/icons/ERROR.svg";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from "../contexts/ThemeContext";
+import { toast } from 'react-toastify';
 
 const Verification = () => {
   const location = useLocation();
   const { darkMode } = useContext(ThemeContext);
   const [signed, setSigned] = useState(false);
-  const [error, setError] = useState(""); // حالة لتخزين رسالة الخطأ
   const [code, setCode] = useState(new Array(6).fill("")); // لتخزين كود التفعيل كـ 6 أرقام
-  const [resendSuccess, setResendSuccess] = useState(""); // حالة لتخزين رسالة نجاح إعادة الإرسال
   const email = location.state?.email || ""; // الحصول على البريد الإلكتروني من الحالة
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -30,7 +29,8 @@ const Verification = () => {
   };
 
   // دالة إرسال الطلب إلى API
-  const handleSigned = async () => {
+  const handleSigned = async (e) => {
+    e.preventDefault();
     // try {
     //   const verificationCode = code.join(""); // تحويل الكود إلى نص كامل
     //   const formData = new FormData();
@@ -45,11 +45,14 @@ const Verification = () => {
     //   console.log("Verification successful:", response.data);
     //   const token = response.data.token;
     //   localStorage.setItem("authToken", token);
-       setSigned(true); // إظهار رسالة النجاح
-    // } catch (error) {
-    //   console.error("Verification failed:", error);
-    //   setError(t("error_message.verification_failed")); // عرض رسالة خطأ عند فشل التحقق
-    // }
+    setSigned(true); // إظهار رسالة النجاح
+    try {
+      // ... (كود التحقق)
+      toast.success(t("verification_success_message"));
+      navigate("/");
+    } catch (error) {
+      toast.error(t("error_message.verification_failed"));
+    }
   };
   // دالة إعادة إرسال الكود
   const handleResendCode = async () => {
@@ -64,11 +67,11 @@ const Verification = () => {
     //     token
     //   );
     //   console.log("Code resent successfully:", response.data);
-    //   setResendSuccess(t("code_resent_successfully")); // عرض رسالة نجاح
+    //    toast.success(t("code_resent_successfully"));// عرض رسالة نجاح
     // } catch (error) {
     //   console.error("Resend code failed:", error);
-    //   setError(t("error_message.resend_failed")); // عرض رسالة خطأ عند فشل إعادة الإرسال
-     setResendSuccess(""); // إعادة تعيين رسالة النجاح
+    //    toast.error(t("error_message.resend_failed")); // عرض رسالة خطأ عند فشل إعادة الإرسال
+    toast.success(t("verification_success_message"));
     // }
   };
 
@@ -115,15 +118,6 @@ const Verification = () => {
                 required
               />
             </div>
-
-            {error && (
-              <div className="flex items-center justify-center border border-red-400 text-red-700 mx-28 py-2 mt-2 rounded-md mb-4">
-                <span>
-                  <img src={IconError} className="h-5 w-5 mr-2" alt="Error Icon" />
-                </span>
-                <span className="text-sm">{error}</span>
-              </div>
-            )}
 
             <button
               type="submit"

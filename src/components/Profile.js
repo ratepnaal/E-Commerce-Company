@@ -12,6 +12,9 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { useAuth } from "../contexts/AuthContext";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -24,6 +27,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     logout(); // <-- 3. استدعاء دالة logout من الـ Context
+    toast.success(t('logout_success_message') || 'Logged out successfully');
     navigate("/"); // توجيه المستخدم لصفحة تسجيل الدخول بعد الخروج
   };
 
@@ -76,7 +80,7 @@ const Profile = () => {
 
           {/* Logout Button */}
           <button
-            onClick={handleLogoutClick}
+            onClick={handleLogout}
             className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg flex items-center"
           >
             <img src={IconLogout} alt="Logout" className="w-5 h-5 mr-2" />
@@ -103,30 +107,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
-      {/* Logout Confirmation Modal */}
-      {showLogoutConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
-            <h2 className="text-xl font-bold mb-4">{t('confirm_logout')}</h2>
-            <p className="mb-4">{t('logout_message')}</p>
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={handleCloseLogout}
-                className="px-4 py-2 bg-gray-300 rounded-lg"
-              >
-                {t('cancel')}
-              </button>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg"
-              >
-                {t('logout')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };
