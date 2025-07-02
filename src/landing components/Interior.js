@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import FloorsFrame from '../images/frames/FrameFloors.png';
 import WallsFrame from '../images/frames/Frame Walls.png';
@@ -9,8 +9,11 @@ import ViewAll from '../images/icons/veiwAll.svg';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-const Interior = ({darkMode , setDarkMode}) => {
-  const {t} = useTranslation();
+import { ThemeContext } from '../contexts/ThemeContext';
+
+const Interior = () => {
+  const { t } = useTranslation();
+  const { darkMode } = useContext(ThemeContext);
   const sections = [
     { title:`${t('floor')}`, image: FloorsFrame } ,
     { title: `${t('walls')}`, image: WallsFrame },

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import ShrubsImage from '../images/frames/FrameShrubs.png';
 import Pavements from '../images/frames/framePavements.png';
 import ViewAllIcon from '../images/icons/veiwAll.svg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { ThemeContext } from '../contexts/ThemeContext';
 
-const LandScaping = ({ darkMode, setDarkMode }) => {
+const LandScaping = () => {
   const { t } = useTranslation();
+  const { darkMode } = useContext(ThemeContext);
   const sections = [
     { title: `${t('shrubs')}`, image: ShrubsImage },
     { title: `${t('pavements')}`, image: Pavements },

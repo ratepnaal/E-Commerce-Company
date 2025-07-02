@@ -70,7 +70,7 @@
   "awards_and_certifications": "AWARDS AND CERTIFICATIONS:",
   "proud_member": "* PROUD MEMBER OF THE NATIONAL ASSOCIATION OF LANDSCAPE PROFESSIONALS",
   "certified_green_builder": "* CERTIFIED GREEN BUILDER",
-  "footer_note": "© 2024 Z AND N CONSTRUCTION AND LANDSCAPING. ALL RIGHTS RESERVED.",
+  "footer_note": "© 2025 ALL RIGHTS RESERVED TO ENG. RATEB ALNAAL.",
   "name_label": "NAME:",
   "name": "JAMES WILLIAMS",
   "country_label": "COUNTRY:",
@@ -149,7 +149,11 @@
    "forgot_password_label": "Forgot your password?",
    "dont-have-account-label": "Don't have an account?",
    "dont-have-account": "Create a new account",
-   "forgot_password": "Forgot Password"
+   "forgot_password": "Forgot Password",
+   "verify_reset_code_title": "Verify Your Code",
+   "verify": "Verify",
+   "reset_code_success_message": "Verification successful! You can now set a new password.",
+   "verification_title": "Email Verification"
 }
 
   

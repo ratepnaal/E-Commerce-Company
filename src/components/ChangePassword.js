@@ -25,7 +25,7 @@ const ChangePassword = () => {
  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    
 
     try {
       await requestPasswordReset({ email });

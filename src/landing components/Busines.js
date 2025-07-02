@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import interior1 from '../images/interior/interior1.png';
 import interior2 from '../images/interior/interior2.png';
@@ -18,20 +18,21 @@ import EmailIcon from '../images/icons/ic_outline-email.svg';
 import viewAllIcon from '../images/icons/veiwAll.svg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
-const Business = ({darkMode , setDarkMode}) => {
-  const {t} = useTranslation();
+import { ThemeContext } from '../contexts/ThemeContext';
+const Business = () => {
+  const { t } = useTranslation();
+  const { darkMode } = useContext(ThemeContext);
   return (
-    <div className={`bg-blue-300 p-8 ${darkMode?`bg-gray-800 text-white`:``}`}>
+    <div className={`p-8 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-blue-300'}`}>
       {/* Tittle section */}
-      <h1 className={`text-4xl font-semibold text-center mb-8 ${darkMode?`text-white`:``}`} >
+      <h1 className={`text-4xl font-semibold text-center mb-8 ${darkMode ? 'text-white' : ''}`} >
      {t('Business-exhibition')}
       </h1>
 
       {/*section images*/}
       <div className="flex justify-between" id='projects'>
         {/* interior images*/}
-       <div className={`w-1/2 border border-blue-300 p-4 mr-5 rounded-md ${darkMode?`bg-gray-500`:`bg-white`}` } >
+       <div className={`w-1/2 border p-4 mr-5 rounded-xl shadow-lg ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-blue-300'}` } >
           <div className={`flex justify-between items-center mb-4 `} >
           <h2 className={`text-sm md:text-xl font-bold  ${darkMode?`text-white`:``}`}>{t('interior')}</h2>
             <button className="flex items-center px:1 py-1 md:px-3 text-xs md:text-sm  bg-teal-900 text-white rounded-lg mb-4 hover:bg-teal-950 transition">
@@ -50,7 +51,7 @@ const Business = ({darkMode , setDarkMode}) => {
         </div>
 
         {/*exterior images*/}
-        <div className={`w-1/2 border border-blue-300 p-4 rounded-md   ${darkMode?`bg-gray-500`:`bg-white`}` } >
+        <div className={`w-1/2 border p-4 rounded-xl shadow-lg ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-blue-300'}` } >
           <div className="flex justify-between items-center mb-4">
           <h2 className={`text-sm md:text-xl font-bold  ${darkMode?`text-white`:``}`}>{t('exterior')}</h2>
             <button className="flex items-center px:1 py-1 md:px-3 text-xs md:text-sm  bg-teal-900 text-white rounded-lg mb-4 hover:bg-teal-950 transition">
@@ -70,7 +71,7 @@ const Business = ({darkMode , setDarkMode}) => {
       </div>
 
       {/* contact us*/}
-      <div className= {`md:flex justify-between items-center mt-8 bg-blue-300 p-4 rounded-md ${darkMode?`bg-gray-800`:``}`} id='contact'>
+      <div className= {`md:flex justify-between items-center mt-8 p-4 rounded-xl shadow ${darkMode ? 'bg-gray-800' : 'bg-blue-300'}`} id='contact'>
         <div className='flex items-center'>
             <span className='text-2xl'>{t('contact_us')}</span>
         </div>

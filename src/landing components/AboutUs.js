@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next'; 
 import FakeVedio from '../images/FakeVedio.png'; 
 import ShadowFakeVedio from '../images/ShadowVedio.png'; 
@@ -7,10 +7,12 @@ import PlayVedio from '../images/icons/playVedio.svg';
 import DarkModeToggle from '../components/DarkModeToggle';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { ThemeContext } from '../contexts/ThemeContext';
 
-const AboutUs = ({ darkMode, setDarkMode }) => {
+const AboutUs = () => {
   const { t } = useTranslation(); 
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const { darkMode } = useContext(ThemeContext);
 
   const handleVideoClick = () => {
     setIsVideoOpen(true);
@@ -25,7 +27,7 @@ const AboutUs = ({ darkMode, setDarkMode }) => {
       <h2 className={`text-3xl font-medium text-center py-5 bg-blue-200  h-full w-full ${darkMode?`bg-gray-800`:``}`} >
         {t('about_us')}
       </h2>
-      <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
+      <DarkModeToggle darkMode={darkMode} />
       <div className="flex h-full w-full">
         
         <div className='w-full md:w-1/2 h-full flex-row px-5 py-5'>

@@ -70,7 +70,7 @@
   "awards_and_certifications": "الجوائز والشهادات:",
   "proud_member": "عضو فخور في الرابطة الوطنية للمتخصصين في تنسيق الحدائق",
   "certified_green_builder": "بناء معتمد صديق للبيئة",
-  "footer_note": "© 2024 Z و N للبناء وتنسيق الحدائق. جميع الحقوق محفوظة.",
+  "footer_note": "© 2025 جميع الحقوق محفوظة للمهندس راتب النعال.",
   "social_media": "@جيمس_ويليامز",
   "name_label": "الاسم:",
   "name": "جيمس ويليامز",
@@ -148,7 +148,11 @@
 "forgot_password_label": "هل نسيت كلمة المرور؟",
 "dont-have-account-label": "ليس لديك حساب؟",
 "dont-have-account": "أنشئ حساب جديد",
-"forgot_password": "نسيت كلمة المرور"
+"forgot_password": "نسيت كلمة المرور",
+"verify_reset_code_title": "تحقق من الرمز",
+"verify": "تحقق",
+"reset_code_success_message": "تم التحقق بنجاح! يمكنك الآن تعيين كلمة مرور جديدة.",
+  "verification_title": "تأكيد البريد الإلكتروني"
 }
 
 
