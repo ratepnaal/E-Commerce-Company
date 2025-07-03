@@ -213,7 +213,7 @@ const SignUp = () => {
                 </button>
                 <div className="mt-4 w-full flex flex-col items-center gap-2">
                   <Link
-                    to="/forgot-password"
+                    to="/change-password"
                     className={`text-sm font-semibold ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-500 hover:text-blue-700'}`}
                   >
                     {t("forgot_password")}
